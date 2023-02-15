@@ -2,6 +2,10 @@ const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
+const productRouter = require('./routers/productRouter')
+const brandRouter = require('./routers/brandRouter')
+const utilRouter = require('./routers/utilRouter')
+const webInfoRouter = require('./routers/webInfoRouter')
 
 dotenv.config()
 
@@ -49,3 +53,8 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Serve at http://localhost:${PORT}`)
 })
+
+app.use('/api/products', productRouter)
+app.use('/api/brands', brandRouter)
+app.use('/api/utils', utilRouter)
+app.use('/api/webinfos', webInfoRouter)

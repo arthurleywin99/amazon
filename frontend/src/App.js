@@ -16,6 +16,8 @@ import AccountScreen from './screens/AccountScreen'
 import OrderCheckingScreen from './screens/OrderCheckingScreen'
 import CartScreen from './screens/CartScreen'
 import SearchScreen from './screens/SearchScreen'
+import SigninScreen from './screens/SigninScreen'
+import SignupScreen from './screens/SignupScreen'
 
 function App() {
   return (
@@ -24,20 +26,65 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<HomeScreen />} />
-          <Route path='/cell-phones' element={<CellphoneScreen />} />
-          <Route path='/laptops' element={<LaptopScreen />} />
-          <Route path='/tablets' element={<TabletScreen />} />
-          <Route path='/accessories' element={<AccessoryScreen />} />
-          <Route path='/smart-watches' element={<SmartwatchScreen />} />
-          <Route path='/watches' element={<WatchScreen />} />
-          <Route path='/used-phones' element={<UsedphoneScreen />} />
-          <Route path='/pc-printers' element={<PcAndPrinterScreen />} />
-          <Route path='/sim-cards' element={<SimAndCardScreen />} />
-          <Route path='/utilities' element={<UtilityScreen />} />
-          <Route path='/my-account' element={<AccountScreen />} />
-          <Route path='/order-checking' element={<OrderCheckingScreen />} />
-          <Route path='/cart' element={<CartScreen />} />
-          <Route path='/search' element={<SearchScreen />} />
+          <Route
+            path='/category/cell-phones/order/:order'
+            element={<CellphoneScreen />}
+            exact
+          />
+          <Route
+            path='/category/laptops/order/:order'
+            element={<LaptopScreen />}
+            exact
+          />
+          <Route
+            path='/category/tablets/order/:order'
+            element={<TabletScreen />}
+            exact
+          />
+          <Route
+            path='/category/accessories/order/:order'
+            element={<AccessoryScreen />}
+            exact
+          />
+          <Route
+            path='/category/smart-watches/order/:order'
+            element={<SmartwatchScreen />}
+            exact
+          />
+          <Route
+            path='/category/watches/order/:order'
+            element={<WatchScreen />}
+            exact
+          />
+          <Route
+            path='/category/used-phones/order/:order'
+            element={<UsedphoneScreen />}
+            exact
+          />
+          <Route
+            path='/category/pc-printers/order/:order'
+            element={<PcAndPrinterScreen />}
+            exact
+          />
+          <Route
+            path='/category/sim-cards/order/:order'
+            element={<SimAndCardScreen />}
+            exact
+          />
+          <Route
+            path='/category/utilities/order/:order'
+            element={<UtilityScreen />}
+            exact
+          />
+          <Route path='/category/my-account' element={<AccountScreen />} />
+          <Route
+            path='/category/order-checking'
+            element={<OrderCheckingScreen />}
+          />
+          <Route path='/category/cart' element={<CartScreen />} />
+          <Route path='/category/search' element={<SearchScreen />} />
+          <Route path='/signin' element={<SigninScreen />} />
+          <Route path='/signup' element={<SignupScreen />} />
         </Routes>
         <Footer />
       </div>

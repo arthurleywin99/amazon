@@ -1,30 +1,77 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
-import { datas } from '../../data'
 import Slider from './Slider'
 import MiddleBanner from './MiddleBanner'
 import MainDeal from './MainDeal'
 import SamsungDeal from './SamsungDeal'
 import Suggestions from './Suggestions'
+import { getWebInfo } from '../../actions/webInfoActions'
+import {
+  getProductDiscount,
+  getSamsungDiscount,
+} from '../../actions/productActions'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Main() {
-  const [bigBanner, setBigBanner] = useState('/images/midbanner.jpg')
-  const [mediumBanner, setMediumBanner] = useState('/images/banner.png')
-  const [dealBanner, setDealBanner] = useState('/images/mid-banner-2.png')
+  const dispatch = useDispatch()
 
-  return (
+  const {
+    data,
+    loading: getWebInfoLoading,
+    error: getWebInfoError,
+  } = useSelector((state) => state.getWebInfo)
+  const {
+    products: topDealProducts,
+    loading: getTopDiscountLoading,
+    error: getTopDiscountError,
+  } = useSelector((state) => state.getProductTopDiscount)
+  const {
+    products: samsungDealProducts,
+    loading: getSamsungTopDiscountLoading,
+    error: getSamsungTopDiscountError,
+  } = useSelector((state) => state.getSamsungTopDiscount)
+
+  useEffect(() => {
+    dispatch(getWebInfo())
+    dispatch(getProductDiscount())
+    dispatch(getSamsungDiscount())
+  }, [dispatch])
+
+  return getWebInfoLoading ||
+    getTopDiscountLoading ||
+    getSamsungTopDiscountLoading ? (
+    <div>Loading</div>
+  ) : getWebInfoError || getTopDiscountError || getSamsungTopDiscountError ? (
+    <div>Error</div>
+  ) : (
     <main>
-      <Slider bigBanner={bigBanner} />
+      {data && (
+        <>
+          <Slider
+            banner={data.filter((item) => item.name === 'Big Banner')[0].image}
+            data={data}
+          />
+          <div className='container mt-12'>
+            <MiddleBanner
+              image={
+                data.filter((item) => item.name === 'Medium Banner')[0].image
+              }
+            />
 
-      <div className='container mt-12'>
-        <MiddleBanner mediumBanner={mediumBanner} />
+            {topDealProducts && (
+              <MainDeal
+                dealBanner={
+                  data.filter((item) => item.name === 'Deal Banner')[0].image
+                }
+              />
+            )}
 
-        <MainDeal dealBanner={dealBanner} products={datas.products} />
-
-        <SamsungDeal products={datas.products} />
-
-        <Suggestions products={datas.products} />
-      </div>
+            {samsungDealProducts && <SamsungDeal />}
+            {/*
+            <Suggestions products={datas.products} /> */}
+          </div>
+        </>
+      )}
     </main>
   )
 }

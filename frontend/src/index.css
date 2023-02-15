@@ -97,6 +97,10 @@ footer {
   }
 }
 
+.mt-3 {
+  margin-top: 3rem !important;
+}
+
 .mt-12 {
   margin-top: 12rem !important;
 }

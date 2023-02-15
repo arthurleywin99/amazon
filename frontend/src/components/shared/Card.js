@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FontAwesome from '../utils/FontAwesome'
 
 function Card({ product }) {
+  const [handleHover, setHandleHover] = useState(false)
+
   return (
-    <div className='card'>
-      <div className='card__image'>
-        <img src={product.image} alt={product.name} />
+    <div
+      className='card'
+      onMouseEnter={() => {
+        setHandleHover(true)
+      }}
+      onMouseLeave={() => {
+        setHandleHover(false)
+      }}
+    >
+      <div
+        className='card__image'
+        style={{
+          transform: `translateY(${handleHover ? '-4%' : '0'})`,
+          transition: 'all .7s',
+        }}
+      >
+        <img src={product.images[0]} alt={product.name} />
         {product.isMonolopy && (
           <img src='/images/Label_01-05.png' alt='Monopoly' />
         )}
@@ -25,8 +41,13 @@ function Card({ product }) {
           <p className='card__coming-soon'>Hàng sắp về</p>
         )}
         <p className='card__price'>
-          <span>{product.price}</span>
-          <span>{product.discount}</span>
+          <span>
+            {product.price.toLocaleString('it-IT', {
+              style: 'currency',
+              currency: 'VND',
+            })}
+          </span>
+          <span>{product.discount}%</span>
         </p>
         <p className='card__rating'>
           <span className='card__rating-average'>
