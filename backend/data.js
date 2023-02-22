@@ -202,3 +202,23 @@ exports.webInfosSeed = [
       'https://res.cloudinary.com/gb-hutech/image/upload/v1676421340/Slider6_seqthj.webp',
   },
 ]
+
+exports.userSeed = [
+  {
+    name: 'Giang',
+    email: 'giang1@gmail.com',
+    phoneNumber: '',
+    password: 'Aa@123',
+    profilePicUrl: '',
+    address: 'HCM City',
+    isAdmin: false,
+    isSeller: false,
+    seller: {
+      name: '',
+      logo: '',
+      description: '',
+      averageRating: 0,
+      numReviews: 0,
+    },
+  },
+]

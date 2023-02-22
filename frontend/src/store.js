@@ -5,7 +5,7 @@ import {
   getProductTopDiscountReducer,
   getSamsungTopDiscountReducer,
 } from './reducers/productReducers'
-import { userRegisterReducer, userSigninReducer } from './reducers/userReducers'
+import { userRegisterReducer, userLoginReducer } from './reducers/userReducers'
 import { getWebInfoReducer } from './reducers/webInfoReducers'
 
 const initialState = {}
@@ -16,7 +16,7 @@ const reducer = combineReducers({
   getProductTopDiscount: getProductTopDiscountReducer,
   getSamsungTopDiscount: getSamsungTopDiscountReducer,
   userRegister: userRegisterReducer,
-  userSignin: userSigninReducer,
+  userSignin: userLoginReducer,
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

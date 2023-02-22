@@ -17,7 +17,6 @@ import OrderCheckingScreen from './screens/OrderCheckingScreen'
 import CartScreen from './screens/CartScreen'
 import SearchScreen from './screens/SearchScreen'
 import SigninScreen from './screens/SigninScreen'
-import SignupScreen from './screens/SignupScreen'
 
 function App() {
   return (
@@ -84,7 +83,6 @@ function App() {
           <Route path='/category/cart' element={<CartScreen />} />
           <Route path='/category/search' element={<SearchScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
-          <Route path='/signup' element={<SignupScreen />} />
         </Routes>
         <Footer />
       </div>

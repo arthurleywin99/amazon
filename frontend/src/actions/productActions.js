@@ -21,7 +21,13 @@ export const getProductByCategory =
       )
       dispatch({ type: PRODUCT_GET_SUCCESS, payload: data })
     } catch (error) {
-      dispatch({ type: PRODUCT_GET_FAIL, payload: error.message })
+      dispatch({
+        type: PRODUCT_GET_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
     }
   }
 
@@ -33,7 +39,13 @@ export const getProductDiscount = () => async (dispatch) => {
     )
     dispatch({ type: PRODUCT_GET_DISCOUNT_SUCCESS, payload: data })
   } catch (error) {
-    dispatch({ type: PRODUCT_GET_DISCOUNT_FAIL, payload: error.message })
+    dispatch({
+      type: PRODUCT_GET_DISCOUNT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 }
 
@@ -47,7 +59,10 @@ export const getSamsungDiscount = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_SAMSUNG_GET_DISCOUNT_FAIL,
-      payload: error.message,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     })
   }
 }

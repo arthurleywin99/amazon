@@ -6,6 +6,7 @@ const productRouter = require('./routers/productRouter')
 const brandRouter = require('./routers/brandRouter')
 const utilRouter = require('./routers/utilRouter')
 const webInfoRouter = require('./routers/webInfoRouter')
+const userRouter = require('./routers/userRouter')
 
 dotenv.config()
 
@@ -58,3 +59,4 @@ app.use('/api/products', productRouter)
 app.use('/api/brands', brandRouter)
 app.use('/api/utils', utilRouter)
 app.use('/api/webinfos', webInfoRouter)
+app.use('/api/users', userRouter)

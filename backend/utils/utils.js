@@ -11,16 +11,11 @@ exports.regexUsername = (username) => {
 exports.generateToken = (user) => {
   return jwt.sign(
     {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      profilePicUrl: user.profilePicUrl,
-      address: user.address,
+      _id: user._id.toString(),
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: '30d',
+      expiresIn: '30m',
     }
   )
 }

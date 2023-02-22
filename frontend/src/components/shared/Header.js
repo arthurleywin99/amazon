@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
-import { Formik, Form } from 'formik'
 import { useSelector } from 'react-redux'
 import FontAwesome from '../utils/FontAwesome'
 import Accessories from './Accessories'
 import PCAndPrinter from './PCAndPrinter'
 import Utilities from './Utilities'
+import Loading from '../bootstrap/Loading'
+import Message from '../bootstrap/Message'
 
 function Header() {
   const { userInfo, loading, error } = useSelector((state) => state.userSignin)
@@ -17,12 +18,16 @@ function Header() {
   const [isShowPCPrinter, setIsShowPCPrinter] = useState(false)
   const [isShowUtilities, setIsShowUtilities] = useState(false)
 
+  const onSubmit = (values) => {
+    alert(JSON.stringify(values))
+  }
+
   return (
     <>
       {loading ? (
-        <div>Loading</div>
+        <Loading />
       ) : error ? (
-        <div>Error</div>
+        <Message message={error} color='danger' />
       ) : (
         <header>
           <div className='header__above'>
@@ -30,59 +35,48 @@ function Header() {
               <strong>amazon</strong>
             </Link>
 
-            <Formik
-              initialValues={{
-                content: '',
-              }}
-              onSubmit={(value) => {
-                alert(JSON.stringify(value))
-              }}
-            >
-              <Form className='header__above-search-form'>
-                <input
-                  name='content'
-                  className='header__above-search-input'
-                  type='text'
-                  style={{
-                    border: isFocus ? '2px solid var(--color-third)' : 'none',
-                  }}
-                  placeholder='Bạn tìm gì...'
-                  onFocus={() => {
-                    setIsFocus(true)
-                  }}
-                  onBlur={() => {
-                    setIsFocus(false)
-                  }}
-                />
+            <form className='header__above-search-form'>
+              <input
+                className='header__above-search-input'
+                style={{
+                  border: isFocus ? '2px solid var(--color-third)' : 'none',
+                }}
+                placeholder='Bạn tìm gì...'
+                onFocus={() => {
+                  setIsFocus(true)
+                }}
+                onBlur={() => {
+                  setIsFocus(false)
+                }}
+              />
 
-                <button
-                  className='header__above-button'
-                  title='Submit'
-                  type='submit'
-                >
-                  <FontAwesome icon='far fa-search' />
-                </button>
-              </Form>
-            </Formik>
+              <button
+                className='header__above-button'
+                title='Submit'
+                type='submit'
+              >
+                <FontAwesome icon='far fa-search' />
+              </button>
+            </form>
             <div className='header__above-option'>
               <Link
                 className='header__above-account'
                 to={userInfo ? '/my-account' : '/signin'}
               >
                 <span>
-                  {userInfo ? `Hello, ${userInfo.name}` : 'Login'} <br />{' '}
-                  <strong>Account & Lists</strong>
+                  {userInfo ? `Xin chào, ${userInfo.firstName}` : 'Đăng nhập'}{' '}
+                  <br /> <strong>Tài khoản</strong>
                 </span>
               </Link>
               <Link className='header__above-order' to='/order-checking'>
                 <span>
-                  Returns <br /> <strong> & Orders</strong>
+                  Lợi nhuận <br /> <strong> & Đơn hàng</strong>
                 </span>
               </Link>
               <Link className='header__above-cart' to='/cart'>
                 <span className='cart__count'>{cartCount}</span>
                 <FontAwesome icon='fab fa-opencart' color='#fff' />
-                <span>Cart</span>
+                <span>Giỏ hàng</span>
               </Link>
             </div>
           </div>

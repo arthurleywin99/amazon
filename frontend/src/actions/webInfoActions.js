@@ -13,6 +13,12 @@ export const getWebInfo = () => async (dispatch) => {
     )
     dispatch({ type: GET_WEBINFO_SUCCESS, payload: data })
   } catch (error) {
-    dispatch({ type: GET_WEBINFO_FAIL, payload: error.message })
+    dispatch({
+      type: GET_WEBINFO_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 }

@@ -1,7 +1,12 @@
 import React from 'react'
+import SigninComponent from '../components/signin/SigninComponent'
 
 function SigninScreen() {
-  return <div className='container'>S</div>
+  return (
+    <>
+      <SigninComponent />
+    </>
+  )
 }
 
 export default SigninScreen
