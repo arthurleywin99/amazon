@@ -1,4 +1,4 @@
-exports.brandSeed = [
+export const brandSeed = [
   {
     name: 'Samsung',
     image:
@@ -56,7 +56,7 @@ exports.brandSeed = [
   },
 ]
 
-exports.productsSeed = [
+export const productsSeed = [
   {
     name: 'OPPO Reno8 T 5G 256GB',
     category: 'Laptops',
@@ -81,66 +81,49 @@ exports.productsSeed = [
     comments: [],
     countInStock: 1000,
     description: 'Tặng loa Olike S2 1.59 Triệu + Trả góp 0%',
-    settings: [],
-    status: true,
-  },
-  {
-    name: 'OPPO Reno8 T 5G 256GB',
-    category: 'Laptops',
-    brand: '63eaf713494a98df7eeb1cc7',
-    images: [
-      '/images/product-list1.jpg',
-      '/images/product-list1.jpg',
-      '/images/product-list1.jpg',
+    settings: [
+      {
+        key: 'Màn hình',
+        value: 'Dynamic AMOLED 2X6.8"Quad HD+ (2K+)',
+      },
+      {
+        key: 'Hệ điều hành',
+        value: 'Android 13',
+      },
+      {
+        key: 'Camera sau',
+        value: 'Chính 200 MP & Phụ 12 MP, 10 MP, 10 MP',
+      },
+      {
+        key: 'Camera trước',
+        value: '12MP',
+      },
+      {
+        key: 'Chip',
+        value: 'Snapdragon 8 Gen 2 8 nhân',
+      },
+      {
+        key: 'RAM',
+        value: '8GB',
+      },
+      {
+        key: 'Dung lượng lưu trữ',
+        value: '256GB',
+      },
+      {
+        key: 'SIM',
+        value: '2 Nano SIM hoặc 1 Nano SIM + 1 eSIMHỗ trợ 5G',
+      },
+      {
+        key: 'Pin, Sạc',
+        value: '5000 mAh, 45 W',
+      },
     ],
-    isMonolopy: true,
-    preorder: {
-      isDisplay: true,
-      content: 'Đặt trước đến 10/02',
-    },
-    sale: {
-      isDisplay: true,
-      content: 'Giảm thêm 1 triệu',
-    },
-    isComingSoon: true,
-    price: 20990000,
-    discount: -24,
-    comments: [],
-    countInStock: 1000,
-    description: 'Tặng loa Olike S2 1.59 Triệu + Trả góp 0%',
-    settings: [],
-    status: true,
-  },
-  {
-    name: 'OPPO Reno8 T 5G 256GB',
-    category: 'Laptops',
-    brand: '63eaf713494a98df7eeb1cc7',
-    images: [
-      '/images/product-list1.jpg',
-      '/images/product-list1.jpg',
-      '/images/product-list1.jpg',
-    ],
-    isMonolopy: true,
-    preorder: {
-      isDisplay: true,
-      content: 'Đặt trước đến 10/02',
-    },
-    sale: {
-      isDisplay: true,
-      content: 'Giảm thêm 1 triệu',
-    },
-    isComingSoon: true,
-    price: 40990000,
-    discount: -19,
-    comments: [],
-    countInStock: 1000,
-    description: 'Tặng loa Olike S2 1.59 Triệu + Trả góp 0%',
-    settings: [],
     status: true,
   },
 ]
 
-exports.webInfosSeed = [
+export const webInfosSeed = [
   {
     name: 'Medium Banner',
     image:
@@ -201,9 +184,24 @@ exports.webInfosSeed = [
     image:
       'https://res.cloudinary.com/gb-hutech/image/upload/v1676421340/Slider6_seqthj.webp',
   },
+  {
+    name: 'VNPay',
+    image:
+      'https://res.cloudinary.com/gb-hutech/image/upload/v1677813756/VNPay_Logo_scv0p7.png',
+  },
+  {
+    name: 'MOMO',
+    image:
+      'https://res.cloudinary.com/gb-hutech/image/upload/v1677813756/MoMo_Logo_ghoiwx.png',
+  },
+  {
+    name: 'Paypal',
+    image:
+      'https://res.cloudinary.com/gb-hutech/image/upload/v1677813756/PayPal_Logo_f0vpb0.png',
+  },
 ]
 
-exports.userSeed = [
+export const userSeed = [
   {
     name: 'Giang',
     email: 'giang1@gmail.com',

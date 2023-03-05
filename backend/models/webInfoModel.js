@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import mongoose from 'mongoose'
 
-const webInfoSchema = new Schema(
+const webInfoSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     image: { type: String, required: true },
@@ -11,4 +10,5 @@ const webInfoSchema = new Schema(
   }
 )
 
-module.exports = mongoose.model('WebInfo', webInfoSchema)
+const WebInfo = mongoose.model('WebInfo', webInfoSchema)
+export default WebInfo

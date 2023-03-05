@@ -1,12 +1,11 @@
-const express = require('express')
-const expressAsyncHandler = require('express-async-handler')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const User = require('../models/userModel')
-const { generateToken } = require('../utils/utils')
-const isEmail = require('validator/lib/isEmail')
-const { randomBytes } = require('crypto')
-const nodemailer = require('nodemailer')
+import express from 'express'
+import expressAsyncHandler from 'express-async-handler'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import User from '../models/userModel.js'
+import { generateToken } from '../utils/utils.js'
+import isEmail from 'validator/lib/isEmail.js'
+import nodemailer from 'nodemailer'
 
 const userRouter = express.Router()
 
@@ -232,4 +231,4 @@ userRouter.post(
   })
 )
 
-module.exports = userRouter
+export default userRouter

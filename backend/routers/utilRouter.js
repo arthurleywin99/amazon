@@ -1,8 +1,8 @@
-const express = require('express')
-const expressAsyncHandler = require('express-async-handler')
-const cloudinary = require('cloudinary').v2
-const { CloudinaryStorage } = require('multer-storage-cloudinary')
-const multer = require('multer')
+import express from 'express'
+import expressAsyncHandler from 'express-async-handler'
+import { v2 as cloudinary } from 'cloudinary'
+import { CloudinaryStorage } from 'multer-storage-cloudinary'
+import multer from 'multer'
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -50,4 +50,4 @@ utilRouter.get(
   })
 )
 
-module.exports = utilRouter
+export default utilRouter

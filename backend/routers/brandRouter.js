@@ -1,7 +1,7 @@
-const express = require('express')
-const expressAsyncHandler = require('express-async-handler')
-const Brand = require('../models/brandModel')
-const { brandSeed } = require('../data')
+import express from 'express'
+import expressAsyncHandler from 'express-async-handler'
+import Brand from '../models/brandModel.js'
+import { brandSeed } from '../data.js'
 
 const brandRouter = express.Router()
 
@@ -13,4 +13,4 @@ brandRouter.get(
   })
 )
 
-module.exports = brandRouter
+export default brandRouter

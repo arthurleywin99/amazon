@@ -1,18 +1,23 @@
-const express = require('express')
-const cors = require('cors')
-const dotenv = require('dotenv')
-const mongoose = require('mongoose')
-const productRouter = require('./routers/productRouter')
-const brandRouter = require('./routers/brandRouter')
-const utilRouter = require('./routers/utilRouter')
-const webInfoRouter = require('./routers/webInfoRouter')
-const userRouter = require('./routers/userRouter')
+import express from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
+import productRouter from './routers/productRouter.js'
+import brandRouter from './routers/brandRouter.js'
+import utilRouter from './routers/utilRouter.js'
+import webInfoRouter from './routers/webInfoRouter.js'
+import userRouter from './routers/userRouter.js'
+import orderRouter from './routers/orderRouter.js'
 
 dotenv.config()
 
 const app = express()
 
-let allowed = ['http://localhost:3000']
+let allowed = [
+  'http://localhost:3000',
+  'http://localhost:8080',
+  'https://sandbox.vnpayment.vn',
+]
 
 function options(req, res) {
   let tmp
@@ -60,3 +65,4 @@ app.use('/api/brands', brandRouter)
 app.use('/api/utils', utilRouter)
 app.use('/api/webinfos', webInfoRouter)
 app.use('/api/users', userRouter)
+app.use('/api/orders', orderRouter)

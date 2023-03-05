@@ -1,11 +1,10 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import mongoose from 'mongoose'
 
-const productSchema = new Schema(
+const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     category: { type: String, required: true },
-    brand: { type: Schema.Types.ObjectId, ref: 'Brand' },
+    brand: { type: mongoose.Schema.Types.ObjectId, ref: 'Brand' },
     images: [{ type: String, required: true }],
     isMonolopy: { type: Boolean, default: false },
     preorder: {
@@ -21,7 +20,7 @@ const productSchema = new Schema(
     discount: { type: Number, default: 0 },
     comments: [
       {
-        user: { type: Schema.Types.ObjectId, ref: 'User' },
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         content: { type: String, required: true },
       },
     ],
@@ -40,4 +39,5 @@ const productSchema = new Schema(
   }
 )
 
-module.exports = mongoose.model('Product', productSchema)
+const Product = mongoose.model('Product', productSchema)
+export default Product

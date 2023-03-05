@@ -1,7 +1,7 @@
-const express = require('express')
-const expressAsyncHandler = require('express-async-handler')
-const WebInfo = require('../models/webInfoModel')
-const { webInfosSeed } = require('../data')
+import express from 'express'
+import expressAsyncHandler from 'express-async-handler'
+import WebInfo from '../models/webInfoModel.js'
+import { webInfosSeed } from '../data.js'
 
 const webInfoRouter = express.Router()
 
@@ -21,4 +21,4 @@ webInfoRouter.get(
   })
 )
 
-module.exports = webInfoRouter
+export default webInfoRouter
