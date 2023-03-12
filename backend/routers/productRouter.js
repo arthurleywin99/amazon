@@ -53,10 +53,6 @@ productRouter.get(
             category: product.category,
             brand: product.brand,
             images: product.images,
-            isMonolopy: product.isMonolopy,
-            preorder: product.preorder,
-            sale: product.sale,
-            isCommingSoon: product.isCommingSoon,
             price: product.price,
             discount: product.discount,
             comments: product.comments,
@@ -115,10 +111,6 @@ productRouter.get(
           category: item.category,
           brand: item.brand,
           images: item.images,
-          isMonolopy: item.isMonolopy,
-          preorder: item.preorder,
-          sale: item.sale,
-          isCommingSoon: item.isCommingSoon,
           price: item.price,
           discount: item.discount,
           comments: item.comments,
@@ -167,10 +159,6 @@ productRouter.get(
           category: item.category,
           brand: item.brand,
           images: item.images,
-          isMonolopy: item.isMonolopy,
-          preorder: item.preorder,
-          sale: item.sale,
-          isCommingSoon: item.isCommingSoon,
           price: item.price,
           discount: item.discount,
           comments: item.comments,
@@ -189,11 +177,10 @@ productRouter.get(
 
 productRouter.get(
   '/:id',
-  isAuth,
   expressAsyncHandler(async (req, res) => {
     try {
       const { id } = req.params
-      const product = await Product.findById(id)
+      const product = await Product.findById(id).populate('brand')
       const orders = await Order.find({})
 
       if (product) {
@@ -217,10 +204,6 @@ productRouter.get(
           category: product.category,
           brand: product.brand,
           images: product.images,
-          isMonolopy: product.isMonolopy,
-          preorder: product.preorder,
-          sale: product.sale,
-          isCommingSoon: product.isCommingSoon,
           price: product.price,
           discount: product.discount,
           comments: product.comments,

@@ -48,8 +48,11 @@ function SigninForm({ setShowForm }) {
 
   return (
     <div className='container'>
-      <form className='signin_form' onSubmit={handleSubmit(onSubmit)}>
-        <h1>Đăng nhập</h1>
+      <form
+        className='block relative w-96 m-auto box-shadow-signin text-center py-12 px-2.5 mt-24 rounded-lg'
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <h1 className='text-3xl font-bold'>Đăng nhập</h1>
 
         {loading && <Loading />}
         {userRegister && firstTouchedRef.current && (
@@ -64,12 +67,15 @@ function SigninForm({ setShowForm }) {
           {...register('username')}
           onFocus={handleFocus}
           placeholder='Email hoặc số điện thoại'
-          className={`signin_input ${errors.username && 'error-input'}`}
+          className={`text-base px-3 py-3.5 my-2.5 w-80 border border-solid rounded-md bg-white border-borderbtn focus:border focus:border-solid focus:border-btn focus:outline-none ${
+            errors.username &&
+            'border border-solid border-danger focus:border focus:border-solid focus:border-danger'
+          }`}
           type='text'
         />
 
         {errors.username && (
-          <div className='validation username-error'>
+          <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[95px] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[20px]'>
             {errors.username?.message}
           </div>
         )}
@@ -77,22 +83,33 @@ function SigninForm({ setShowForm }) {
         <input
           {...register('password')}
           placeholder='Mật khẩu'
-          className={`signin_input ${errors.password && 'error-input'}`}
+          className={`text-base px-3 py-3.5 my-2.5 w-80 border border-solid rounded-md bg-white border-borderbtn focus:border focus:border-solid focus:border-btn focus:outline-none ${
+            errors.password &&
+            'border border-solid border-danger focus:border focus:border-solid focus:border-danger'
+          }`}
           type='password'
         />
 
         {errors.password && (
-          <div className='validation password-signin-error'>
+          <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] top-[33%] before:content-[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[15px]'>
             {errors.password?.message}
           </div>
         )}
 
-        <button type='submit'>Đăng nhập</button>
-        <Link className='signin_forgot_password' to='/'>
+        <button
+          className='block m-auto w-80 text-base border-none rounded bg-amber-400 text-slate-600 font-bold py-4 my-5 hover:cursor-pointer hover:bg-amber-500 hover:text-black'
+          type='submit'
+        >
+          Đăng nhập
+        </button>
+        <Link className='text-blue-700 text-sm' to='/'>
           Quên mật khẩu?
         </Link>
-        <div className='signin_divide'></div>
-        <Link className='signin_register-button' onClick={handleShowForm}>
+        <div className='h-px w-80 bg-slate-300 mt-5 mb-5 inline-block'></div>
+        <Link
+          className='w-56 text-base rounded border-none bg-slate-400 font-bold text-black py-4 px-5 my-5'
+          onClick={handleShowForm}
+        >
           Tạo tài khoản mới
         </Link>
       </form>

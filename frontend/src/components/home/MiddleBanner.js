@@ -2,9 +2,13 @@ import React from 'react'
 
 function MiddleBanner({ image }) {
   return (
-    <>
-      <img className='main__banner-medium' src={image} alt='Medium Banner' />
-    </>
+    <div className='container m-auto'>
+      <img
+        className='cursor-pointer mb-[25px]'
+        src={image}
+        alt='Medium Banner'
+      />
+    </div>
   )
 }
 

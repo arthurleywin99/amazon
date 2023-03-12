@@ -57,25 +57,39 @@ function ProductList() {
   return loading && <div>Loading</div> ? (
     error && <div>Error</div>
   ) : (
-    <div className='product__list'>
-      <div className='product__list-heading'>
-        <h4>{products.length || 0} Kết quả</h4>
-        <select value={order} onChange={handleChange}>
+    <div className='container m-auto'>
+      <div className='flex justify-between'>
+        <h4 className='text-[24px] font-bold'>
+          {products.length || 0} Kết quả
+        </h4>
+        <select
+          className='border border-solid border-[#e0e0e0] rounded text-[12px] leading-3 py-[6px] pr-[10px] pl-[8px]'
+          value={order}
+          onChange={handleChange}
+        >
           <option value='discount'>% Giảm</option>
           <option value='decrease'>Giá cao đến thấp</option>
           <option value='increase'>Giá thấp đến cao</option>
         </select>
       </div>
-      <div className='product__list-result'>
+      <div className='grid auto-rows-[minmax(min-content, max-content)] grid-cols-5 mt-[10px]'>
         {productList &&
           productList.map((product, index) => (
-            <Link to={`/`} key={index} className='product__list-card'>
+            <Link
+              to={`/product/${product._id}`}
+              key={index}
+              className='pt-[10px] px-[15px] pb-[20px] border border-solid border-[rgb(243, 243, 243)]'
+            >
               <Card product={product} />
             </Link>
           ))}
       </div>
       {pageNumberRef.current * 15 <= products.length && (
-        <button type='button' onClick={handleSeemore}>
+        <button
+          className='flex my-[20px] mx-auto py-[15px] px-[50px] rounded border border-solid border-[rrgb(243, 243, 243)] text-[14px] font-bold hover:bg-[#2f80ed] hover:text-white'
+          type='button'
+          onClick={handleSeemore}
+        >
           Xem thêm
         </button>
       )}

@@ -66,16 +66,6 @@ export const productsSeed = [
       '/images/product-list1.jpg',
       '/images/product-list1.jpg',
     ],
-    isMonolopy: true,
-    preorder: {
-      isDisplay: true,
-      content: 'Đặt trước đến 10/02',
-    },
-    sale: {
-      isDisplay: true,
-      content: 'Giảm thêm 1 triệu',
-    },
-    isComingSoon: true,
     price: 990000,
     discount: -14,
     comments: [],

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './style.css'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import FontAwesome from '../utils/FontAwesome'
@@ -76,77 +75,97 @@ function SignupForm({ setShowForm }) {
 
   return (
     <>
-      <div className='blur'>
-        <form className='signup_form' onSubmit={handleSubmit(onSubmit)}>
-          <div className='form_exit-icon' onClick={handleHideForm}>
+      <div className='fixed bg-gray-400 color-blur inset-0 z-50'>
+        <form
+          className='relative block w-[360px] bg-white m-auto box-shadow-signin text-center py-[50px] px-[10px] mt-[92px] rounded-lg'
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div
+            className='absolute right-[5px] top-[5px] text-2xl hover:cursor-pointer hover:opacity-70'
+            onClick={handleHideForm}
+          >
             <ExitButton />
           </div>
-          <h1>Đăng ký</h1>
+          <h1 className='text-3xl font-bold'>Đăng ký</h1>
 
           {loading && <Loading />}
           {error && <Message message={error} color='danger' />}
 
           <input
             {...register('firstName')}
-            className={`signup_input ${errors.firstName && 'error-input'}`}
+            className={`w-[330px] text-[17px] leading-4 py-[12px] px-4 my-2.5 rounded-md border border-solid border-borderbtn focus:border focus:border-solid focus:border-btn focus:outline-none ${
+              errors.firstName &&
+              'border border-solid border-danger focus:border focus:border-solid focus:border-danger'
+            }`}
             type='text'
             placeholder='Họ'
           />
 
           {errors.firstName && (
-            <div className='validation fistname-error'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[14%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
               {errors.firstName?.message}
             </div>
           )}
 
           <input
             {...register('lastName')}
-            className={`signup_input ${errors.lastName && 'error-input'}`}
+            className={`w-[330px] text-[17px] leading-4 py-[12px] px-4 my-2.5 rounded-md border border-solid border-borderbtn focus:border focus:border-solid focus:border-btn focus:outline-none ${
+              errors.lastName &&
+              'border border-solid border-danger focus:border focus:border-solid focus:border-danger'
+            }`}
             type='text'
             placeholder='Tên'
           />
 
           {errors.lastName && (
-            <div className='validation lastname-error'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] top-[23%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[15px]'>
               {errors.lastName?.message}
             </div>
           )}
 
           <input
             {...register('email')}
-            className={`signup_input ${errors.email && 'error-input'}`}
+            className={`w-[330px] text-[17px] leading-4 py-[12px] px-4 my-2.5 rounded-md border border-solid border-borderbtn focus:border focus:border-solid focus:border-btn focus:outline-none ${
+              errors.email &&
+              'border border-solid border-danger focus:border focus:border-solid focus:border-danger'
+            }`}
             type='email'
             placeholder='Nhập email'
           />
 
           {errors.email && (
-            <div className='validation email-error'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[33%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
               {errors.email?.message}
             </div>
           )}
 
           <input
             {...register('password')}
-            className={`signup_input ${errors.password && 'error-input'}`}
+            className={`w-[330px] text-[17px] leading-4 py-[12px] px-4 my-2.5 rounded-md border border-solid border-borderbtn focus:border focus:border-solid focus:border-btn focus:outline-none ${
+              errors.password &&
+              'border border-solid border-danger focus:border focus:border-solid focus:border-danger'
+            }`}
             type='password'
             placeholder='Mật khẩu mới'
           />
 
           {errors.password && (
-            <div className='validation password-signup-error'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] top-[42%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[14px]'>
               {errors.password?.message}
             </div>
           )}
 
-          <div className='signup_birthdate-group'>
-            <div className='signup_birthdate-heading'>
+          <div className='text-left mb-2.5'>
+            <div className='text-[13px] pl-[5px]'>
               <span>Sinh nhật</span> <QuestionIcon />
             </div>
-            <div className='signup_birthdate-select'>
+            <div className='flex justify-between px-[5px]'>
               <select
                 {...register('bDay')}
-                className={`${
-                  errors.atLeast13 || errors.noMoreThan70 ? 'error-select' : ''
+                className={`text-[17px] py-[10px] px-4 w-3/10 rounded border border-solid border-borderbtn bg-white ${
+                  errors.atLeast13 || errors.noMoreThan70
+                    ? 'border border-solid border-danger rounded-md'
+                    : ''
                 }`}
                 value={bDay}
                 onChange={handleUpdateDay}
@@ -160,8 +179,9 @@ function SignupForm({ setShowForm }) {
 
               <select
                 {...register('bMonth')}
-                className={`${
-                  (errors.atLeast13 || errors.noMoreThan70) && 'error-select'
+                className={`text-[17px] py-[10px] px-4 w-3/10 rounded border border-solid border-borderbtn bg-white ${
+                  (errors.atLeast13 || errors.noMoreThan70) &&
+                  'border border-solid border-danger rounded-md'
                 }`}
                 value={bMonth}
                 onChange={handleUpdateDay}
@@ -175,8 +195,9 @@ function SignupForm({ setShowForm }) {
 
               <select
                 {...register('bYear')}
-                className={`${
-                  (errors.atLeast13 || errors.noMoreThan70) && 'error-select'
+                className={`text-[17px] py-[10px] px-4 w-3/10 rounded border border-solid border-borderbtn bg-white ${
+                  (errors.atLeast13 || errors.noMoreThan70) &&
+                  'border border-solid border-danger rounded-md'
                 }`}
                 value={bYear}
                 onChange={handleUpdateDay}
@@ -191,26 +212,32 @@ function SignupForm({ setShowForm }) {
           </div>
 
           {errors.atLeast13 && (
-            <div className='validation date-error'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] bottom-[35%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-l-danger before:right-[-20px] before:top-[20%]'>
               {errors.atLeast13?.message}
             </div>
           )}
 
           {errors.noMoreThan70 && (
-            <div className='validation date-error'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] bottom-[35%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-l-danger before:right-[-20px] before:top-[20%]'>
               {errors.noMoreThan70?.message}
             </div>
           )}
 
-          <div className='signup_gender-group'>
-            <div className='signup_birthdate-heading'>
+          <div className='text-left mb-2.5'>
+            <div className='mb-1.5 text-[13px] pl-[5px]'>
               <span>Giới tính</span> <QuestionIcon />
             </div>
-            <div className='signup_birthdate-select'>
+            <div className='flex justify-between px-[5px]'>
               <div
-                className={`gender-option ${errors.gender && 'error-select'}`}
+                className={`text-[17px] w-3/10 py-2.5 rounded-md border border-solid border-borderbtn bg-white ${
+                  errors.gender &&
+                  'border border-solid border-danger rounded-md'
+                }`}
               >
-                <label htmlFor='female'>
+                <label
+                  className='flex justify-between align-center px-2.5'
+                  htmlFor='female'
+                >
                   Nữ
                   <input
                     {...register('gender')}
@@ -221,9 +248,15 @@ function SignupForm({ setShowForm }) {
                 </label>
               </div>
               <div
-                className={`gender-option ${errors.gender && 'error-select'}`}
+                className={`text-[17px] w-3/10 py-2.5 rounded-md border border-solid border-borderbtn bg-white ${
+                  errors.gender &&
+                  'border border-solid border-danger rounded-md'
+                }`}
               >
-                <label htmlFor='male'>
+                <label
+                  className='flex justify-between align-center px-2.5'
+                  htmlFor='male'
+                >
                   Nam
                   <input
                     {...register('gender')}
@@ -234,9 +267,15 @@ function SignupForm({ setShowForm }) {
                 </label>
               </div>
               <div
-                className={`gender-option ${errors.gender && 'error-select'}`}
+                className={`text-[17px] w-3/10 py-2.5 rounded-md border border-solid border-borderbtn bg-white ${
+                  errors.gender &&
+                  'border border-solid border-danger rounded-md'
+                }`}
               >
-                <label htmlFor='other'>
+                <label
+                  className='flex justify-between align-center px-2.5'
+                  htmlFor='other'
+                >
                   Khác
                   <input
                     {...register('gender')}
@@ -250,18 +289,21 @@ function SignupForm({ setShowForm }) {
           </div>
 
           {errors.gender && (
-            <div className='validation gender-error'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] bottom-[28%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[10px]'>
               {errors.gender?.message}
             </div>
           )}
 
-          <p className='signup_note'>
+          <p className='text-justify p-2.5 text-xs text-gray7'>
             Bằng cách nhấp vào Đăng ký, bạn đồng ý với Điều khoản, Chính sách
             quyền riêng tư và Chính sách của chúng tôi. Bạn có thể nhận được
             thông báo của chúng tôi qua email và hủy nhận bất kỳ lúc nào
           </p>
 
-          <button className='signup_register-button' type='submit'>
+          <button
+            className='w-[330px] text-base border-none rounded-md bg-btn text-gray5 font-bold py-[15px] my-[2px] hover:cursor-pointer hover:bg-amber-500 hover:text-black'
+            type='submit'
+          >
             Đăng ký
           </button>
         </form>

@@ -36,7 +36,7 @@ function LaptopScreen() {
   ) : error ? (
     <div>Error</div>
   ) : (
-    <div className='container mt-3'>
+    <div>
       {brands && <Brands brands={brands} />}
       {products && <ProductList category={LAPTOPS} />}
     </div>

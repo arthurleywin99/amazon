@@ -10,13 +10,12 @@ import SmartwatchScreen from './screens/SmartwatchScreen'
 import WatchScreen from './screens/WatchScreen'
 import UsedphoneScreen from './screens/UsedphoneScreen'
 import PcAndPrinterScreen from './screens/PcAndPrinterScreen'
-import SimAndCardScreen from './screens/SimAndCardScreen'
-import UtilityScreen from './screens/UtilityScreen'
 import AccountScreen from './screens/AccountScreen'
 import OrderCheckingScreen from './screens/OrderCheckingScreen'
 import CartScreen from './screens/CartScreen'
 import SearchScreen from './screens/SearchScreen'
 import SigninScreen from './screens/SigninScreen'
+import ProductScreen from './screens/ProductScreen'
 
 function App() {
   return (
@@ -65,16 +64,6 @@ function App() {
             element={<PcAndPrinterScreen />}
             exact
           />
-          <Route
-            path='/category/sim-cards/order/:order'
-            element={<SimAndCardScreen />}
-            exact
-          />
-          <Route
-            path='/category/utilities/order/:order'
-            element={<UtilityScreen />}
-            exact
-          />
           <Route path='/category/my-account' element={<AccountScreen />} />
           <Route
             path='/category/order-checking'
@@ -83,6 +72,7 @@ function App() {
           <Route path='/category/cart' element={<CartScreen />} />
           <Route path='/category/search' element={<SearchScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
+          <Route path='/product/:id' element={<ProductScreen />} />
         </Routes>
         <Footer />
       </div>

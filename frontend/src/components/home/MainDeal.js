@@ -41,17 +41,20 @@ function MainDeal({ dealBanner }) {
   ) : error ? (
     <div>Error</div>
   ) : (
-    <div className='main__deal'>
-      <img src={dealBanner} alt='Deal Banner' />
-      <div className='main__list-product-deal'>
+    <div className='container m-auto mb-[30px]'>
+      <img className='block' src={dealBanner} alt='Deal Banner' />
+      <div className='px-[10px] pt-[10px] pb-[20px] bg-[#b3141b] relative rounded-bl-[14px] rounded-br-[14px]'>
         {products.length > 5 && (
           <div className='main__list-product-button-prev' onClick={handlePrev}>
             <FontAwesome icon='far fa-chevron-left' />
           </div>
         )}
-        <ul>
+        <ul className='grid grid-cols-5'>
           {productList.map((product, index) => (
-            <li key={index}>
+            <li
+              key={index}
+              className='bg-white px-[10px] pt-[10px] pb-[20px] rounded m-[5px]'
+            >
               <Card product={product} />
             </li>
           ))}

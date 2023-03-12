@@ -49,17 +49,25 @@ function Slider({ banner, data }) {
 
   return (
     <div
-      className='main__banner-big'
+      className='pb-[450px] relative'
       style={{
         background: `url(${banner})`,
       }}
     >
-      <div className='main__slider'>
+      <div className='w-full flex items-center justify-center absolute bottom-0 translate-y-1/2'>
         <div className='main__button-prev' onClick={handlePrev}>
           <FontAwesome icon='far fa-chevron-left' color='#000' />
         </div>
-        <img className='slider__img-left' src={images.left} alt='Slider 1' />
-        <img className='slider__img-right' src={images.right} alt='Slider 2' />
+        <img
+          className='w-[600px] h-[180px] rounded-[12px] mr-[5px]'
+          src={images.left}
+          alt='Slider 1'
+        />
+        <img
+          className='w-[600px] h-[180px] rounded-[12px] ml-[5px]'
+          src={images.right}
+          alt='Slider 2'
+        />
         <div className='main__button-next' onClick={handleNext}>
           <FontAwesome icon='far fa-chevron-right' color='#000' />
         </div>

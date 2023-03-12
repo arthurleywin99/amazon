@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import './style.css'
+import React, { useEffect } from 'react'
 import Slider from './Slider'
 import MiddleBanner from './MiddleBanner'
 import MainDeal from './MainDeal'
 import SamsungDeal from './SamsungDeal'
-import Suggestions from './Suggestions'
 import { getWebInfo } from '../../actions/webInfoActions'
 import {
   getProductDiscount,
@@ -51,7 +49,7 @@ function Main() {
             banner={data.filter((item) => item.name === 'Big Banner')[0].image}
             data={data}
           />
-          <div className='container mt-12'>
+          <div className='w-full mt-[120px]'>
             <MiddleBanner
               image={
                 data.filter((item) => item.name === 'Medium Banner')[0].image
@@ -67,8 +65,6 @@ function Main() {
             )}
 
             {samsungDealProducts && <SamsungDeal />}
-            {/*
-            <Suggestions products={datas.products} /> */}
           </div>
         </>
       )}

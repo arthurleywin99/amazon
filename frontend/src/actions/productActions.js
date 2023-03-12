@@ -1,4 +1,7 @@
 import {
+  PRODUCT_GET_BY_ID_FAIL,
+  PRODUCT_GET_BY_ID_REQUEST,
+  PRODUCT_GET_BY_ID_SUCCESS,
   PRODUCT_GET_DISCOUNT_FAIL,
   PRODUCT_GET_DISCOUNT_REQUEST,
   PRODUCT_GET_DISCOUNT_SUCCESS,
@@ -59,6 +62,24 @@ export const getSamsungDiscount = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_SAMSUNG_GET_DISCOUNT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const getProductById = (id) => async (dispatch) => {
+  dispatch({ type: PRODUCT_GET_BY_ID_REQUEST, payload: id })
+  try {
+    const { data } = await Axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/products/${id}`
+    )
+    dispatch({ type: PRODUCT_GET_BY_ID_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_GET_BY_ID_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
