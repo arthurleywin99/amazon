@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductByCategory } from '../actions/productActions'
-import Brands from '../components/shared/Brands'
-import ProductList from '../components/shared/ProductList'
+import { Brands, ProductList } from '../components/shared/index'
 import { USED_PHONE } from '../constants/categoryConstants'
 
 function UsedphoneScreen() {
@@ -36,7 +35,7 @@ function UsedphoneScreen() {
   ) : error ? (
     <div>Error</div>
   ) : (
-    <div className='m-auto'>
+    <div>
       {brands && <Brands brands={brands} />}
       {products && <ProductList category={USED_PHONE} />}
     </div>

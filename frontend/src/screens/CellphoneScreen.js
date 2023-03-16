@@ -36,7 +36,7 @@ function CellphoneScreen() {
   ) : error ? (
     <div>Error</div>
   ) : (
-    <div className='m-auto'>
+    <div>
       {brands && <Brands brands={brands} />}
       {products && <ProductList category={CELLPHONES} />}
     </div>

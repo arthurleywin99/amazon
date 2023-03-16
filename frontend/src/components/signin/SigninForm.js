@@ -47,9 +47,9 @@ function SigninForm({ setShowForm }) {
   }, [userInfo, navigate])
 
   return (
-    <div className='container'>
+    <div className='container m-auto'>
       <form
-        className='block relative w-96 m-auto box-shadow-signin text-center py-12 px-2.5 mt-24 rounded-lg'
+        className='block relative w-96 m-auto box-shadow-signin text-center py-12 px-2.5 rounded-lg'
         onSubmit={handleSubmit(onSubmit)}
       >
         <h1 className='text-3xl font-bold'>Đăng nhập</h1>

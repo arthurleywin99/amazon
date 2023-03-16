@@ -7,8 +7,8 @@ import Message from '../bootstrap/Message'
 
 function Header() {
   const { userInfo, loading, error } = useSelector((state) => state.userSignin)
+  const { cartItems } = useSelector((state) => state.cart)
 
-  const [cartCount, setCartCount] = useState(0)
   const [isFocus, setIsFocus] = useState(false)
 
   const onSubmit = (values) => {
@@ -75,7 +75,10 @@ function Header() {
               </Link>
               <Link className='text-[22px] relative w-auto m-[10px]' to='/cart'>
                 <span className='absolute text-[16px] text-[#f08804] font-bold top-[-12px] left-[10px]'>
-                  {cartCount}
+                  {cartItems.reduce(
+                    (acc, item) => Number(acc) + Number(item.qty),
+                    0
+                  )}
                 </span>
                 <FontAwesome icon='fab fa-opencart' color='#fff' />
                 <span className='text-[14px] font-bold'>Giỏ hàng</span>

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductByCategory } from '../actions/productActions'
 import { WATCH } from '../constants/categoryConstants'
-import Brands from '../components/shared/Brands'
-import ProductList from '../components/shared/ProductList'
+import { Brands, ProductList } from '../components/shared/index'
 function WatchScreen() {
   const dispatch = useDispatch()
   const { products, loading, error } = useSelector(
@@ -35,7 +34,7 @@ function WatchScreen() {
   ) : error ? (
     <div>Error</div>
   ) : (
-    <div className='m-auto'>
+    <div>
       {brands && <Brands brands={brands} />}
       {products && <ProductList category={WATCH} />}
     </div>

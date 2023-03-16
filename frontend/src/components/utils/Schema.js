@@ -14,7 +14,7 @@ export const userRegisterSchema = Yup.object({
       message: 'Không chứa ký tự đặc biệt',
       test: function (value) {
         const myRegex =
-          /^[A-Za-z'"àáảãạằắẳẵặầấẩẫậèéẻẽẹềếểễệòóỏõọồốổỗộờớởỡợùúủũụừứửữựìíỉĩịÀÁẢÃẠẰẮẲẴẶẦẤẨẪẬÈÉẺẼẸỀẾỂỄỆÒÓỎÕỌỒỐỔỖỘỜỚỞỠỢÙÚỦŨỤỪỨỬỮỰÌÍỈĨỊ ]+$/
+          /^[A-Za-z'"àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệòóỏõọồốổỗộơờớởỡợùúủũụưừứửữựìíỉĩịÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÈÉẺẼẸÊỀẾỂỄỆÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰÌÍỈĨỊ ]+$/
         return myRegex.test(value.toString())
       },
     }),
@@ -29,7 +29,7 @@ export const userRegisterSchema = Yup.object({
       message: 'Không chứa ký tự đặc biệt',
       test: function (value) {
         const myRegex =
-          /^[A-Za-z'"àáảãạằắẳẵặầấẩẫậèéẻẽẹềếểễệòóỏõọồốổỗộờớởỡợùúủũụừứửữựìíỉĩịÀÁẢÃẠẰẮẲẴẶẦẤẨẪẬÈÉẺẼẸỀẾỂỄỆÒÓỎÕỌỒỐỔỖỘỜỚỞỠỢÙÚỦŨỤỪỨỬỮỰÌÍỈĨỊ ]+$/
+          /^[A-Za-z'"àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệòóỏõọồốổỗộơờớởỡợùúủũụưừứửữựìíỉĩịÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÈÉẺẼẸÊỀẾỂỄỆÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰÌÍỈĨỊ ]+$/
         return myRegex.test(value.toString())
       },
     }),
@@ -140,4 +140,35 @@ export const userLoginSchema = Yup.object({
         return myRegex.test(value.toString())
       },
     }),
+})
+
+export const shippingAddressSchema = Yup.object({
+  fullName: Yup.string()
+    .required('Họ tên người nhận không được để trống')
+    .test({
+      name: 'Does not contain symbol',
+      exclusive: false,
+      params: {},
+      message: 'Không chứa ký tự đặc biệt',
+      test: function (value) {
+        const myRegex =
+          /^[A-Za-z'"àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệòóỏõọồốổỗộơờớởỡợùúủũụưừứửữựìíỉĩịÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÈÉẺẼẸÊỀẾỂỄỆÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰÌÍỈĨỊ ]+$/
+        return myRegex.test(value.toString())
+      },
+    }),
+  email: Yup.string()
+    .required('Bạn sẽ sử dụng thông tin này để cập nhật tình trạng đơn hàng')
+    .email('Không đúng định dạng email'),
+  phoneNumber: Yup.string()
+    .required('Số điện thoại giao hàng không được để trống')
+    .test({
+      name: 'Phone number pattern',
+      exclusive: false,
+      params: {},
+      message: 'Số điện thoại không đúng dịnh dạng',
+      test: function (value) {
+        return isMobilePhone(value.toString())
+      },
+    }),
+  address: Yup.string().required('Địa chỉ không được để trống'),
 })

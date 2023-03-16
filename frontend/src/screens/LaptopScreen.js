@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductByCategory } from '../actions/productActions'
 import { LAPTOPS } from '../constants/categoryConstants'
-import Brands from '../components/shared/Brands'
-import ProductList from '../components/shared/ProductList'
+import { Brands, ProductList } from '../components/shared/index'
 
 function LaptopScreen() {
   const dispatch = useDispatch()

@@ -66,3 +66,6 @@ app.use('/api/utils', utilRouter)
 app.use('/api/webinfos', webInfoRouter)
 app.use('/api/users', userRouter)
 app.use('/api/orders', orderRouter)
+app.get('/api/config/paypal', (req, res) => {
+  res.status(200).send({ message: process.env.PAYPAL_CLIENT_ID || 'sb' })
+})
