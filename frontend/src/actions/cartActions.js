@@ -2,6 +2,7 @@ import {
   CART_ADD_ITEM,
   CART_ADD_ITEM_FAIL,
   CART_DELETE_ITEM,
+  CART_EMPTY,
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_UPDATE_ITEM,
@@ -91,4 +92,11 @@ export const saveShippingAddress = (address) => (dispatch) => {
 
 export const savePayment = (payment) => (dispatch) => {
   dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: payment })
+}
+
+export const cartClearState = () => (dispatch) => {
+  dispatch({
+    type: CART_EMPTY,
+  })
+  localStorage.removeItem('cartItems')
 }

@@ -3,7 +3,7 @@ import { vnProvinces } from '../utils/VietNamProvinces.js'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { shippingAddressSchema } from '../utils/Schema'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingAddress } from '../../actions/cartActions'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,10 +11,21 @@ function ShippingAddressComponent() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  const { cartItems, shippingAddress } = useSelector((state) => state.cart)
+
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      navigate('/')
+    }
+    if (shippingAddress) {
+      navigate('/checkout?step=payment')
+    }
+  }, [])
+
   const [province, setProvince] = useState({
-    city: '',
-    district: '',
-    ward: '',
+    city: 'Thành phố Hà Nội',
+    district: 'Quận Ba Đình',
+    ward: 'Phường Cống Vị',
   })
 
   const [districtList, setDistrictList] = useState([])

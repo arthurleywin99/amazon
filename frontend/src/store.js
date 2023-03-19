@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { cartReducer } from './reducers/cartReducers'
+import { createOrderReducer, searchOrderByIdReducer } from './reducers/orderReducers'
 import {
   getProductByCategoryReducer,
   getProductByIdReducer,
@@ -32,14 +33,12 @@ const reducer = combineReducers({
   userSignin: userLoginReducer,
   getProductById: getProductByIdReducer,
   cart: cartReducer,
+  createOrder: createOrderReducer,
+  searchOrder: searchOrderByIdReducer,
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(
-  reducer,
-  initialState,
-  composeEnhancer(applyMiddleware(thunk))
-)
+const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)))
 
 export default store

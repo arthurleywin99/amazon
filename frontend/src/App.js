@@ -2,14 +2,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Header from './components/shared/Header'
 import Footer from './components/shared/Footer'
 import HomeScreen from './screens/HomeScreen'
-import CellphoneScreen from './screens/CellphoneScreen'
-import LaptopScreen from './screens/LaptopScreen'
-import TabletScreen from './screens/TabletScreen'
-import AccessoryScreen from './screens/AccessoryScreen'
-import SmartwatchScreen from './screens/SmartwatchScreen'
-import WatchScreen from './screens/WatchScreen'
-import UsedphoneScreen from './screens/UsedphoneScreen'
-import PcAndPrinterScreen from './screens/PcAndPrinterScreen'
+import {
+  AccessoryComponent,
+  CellphoneComponent,
+  LaptopComponent,
+  PcAndPrinterComponent,
+  SmartwatchComponent,
+  TabletComponent,
+  UsedphoneComponent,
+  WatchComponent,
+} from './components/category/index'
 import AccountScreen from './screens/AccountScreen'
 import OrderCheckingScreen from './screens/OrderCheckingScreen'
 import CartScreen from './screens/CartScreen'
@@ -17,6 +19,8 @@ import SearchScreen from './screens/SearchScreen'
 import SigninScreen from './screens/SigninScreen'
 import ProductScreen from './screens/ProductScreen'
 import CheckoutScreen from './screens/CheckoutScreen'
+import CategoryScreen from './screens/CategoryScreen'
+import PrivateRoute from './components/shared/PrivateRoute'
 
 function App() {
   return (
@@ -25,51 +29,25 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<HomeScreen />} />
+          <Route path='/category' element={<CategoryScreen />}>
+            <Route path='cell-phones/order/:order' element={<CellphoneComponent />} />
+            <Route path='laptops/order/:order' element={<LaptopComponent />} />
+            <Route path='tablets/order/:order' element={<TabletComponent />} />
+            <Route path='accessories/order/:order' element={<AccessoryComponent />} />
+            <Route path='smart-watches/order/:order' element={<SmartwatchComponent />} />
+            <Route path='watches/order/:order' element={<WatchComponent />} />
+            <Route path='used-phones/order/:order' element={<UsedphoneComponent />} />
+            <Route path='pc-printers/order/:order' element={<PcAndPrinterComponent />} />
+          </Route>
           <Route
-            path='/category/cell-phones/order/:order'
-            element={<CellphoneScreen />}
-            exact
+            path='/my-account'
+            element={
+              <PrivateRoute>
+                <AccountScreen />
+              </PrivateRoute>
+            }
           />
-          <Route
-            path='/category/laptops/order/:order'
-            element={<LaptopScreen />}
-            exact
-          />
-          <Route
-            path='/category/tablets/order/:order'
-            element={<TabletScreen />}
-            exact
-          />
-          <Route
-            path='/category/accessories/order/:order'
-            element={<AccessoryScreen />}
-            exact
-          />
-          <Route
-            path='/category/smart-watches/order/:order'
-            element={<SmartwatchScreen />}
-            exact
-          />
-          <Route
-            path='/category/watches/order/:order'
-            element={<WatchScreen />}
-            exact
-          />
-          <Route
-            path='/category/used-phones/order/:order'
-            element={<UsedphoneScreen />}
-            exact
-          />
-          <Route
-            path='/category/pc-printers/order/:order'
-            element={<PcAndPrinterScreen />}
-            exact
-          />
-          <Route path='/category/my-account' element={<AccountScreen />} />
-          <Route
-            path='/category/order-checking'
-            element={<OrderCheckingScreen />}
-          />
+          <Route path='/order-checking' element={<OrderCheckingScreen />} />
           <Route path='/cart' element={<CartScreen />} />
           <Route path='/checkout' element={<CheckoutScreen />} />
           <Route path='/search' element={<SearchScreen />} />

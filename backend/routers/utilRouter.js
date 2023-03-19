@@ -3,6 +3,8 @@ import expressAsyncHandler from 'express-async-handler'
 import { v2 as cloudinary } from 'cloudinary'
 import { CloudinaryStorage } from 'multer-storage-cloudinary'
 import multer from 'multer'
+import controller from '../controllers/utilController.js'
+import { showResult } from '../utils/utils.js'
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -26,27 +28,16 @@ utilRouter.post(
   '/cloudinary-upload',
   uploadCloud.single('file'),
   expressAsyncHandler(async (req, res) => {
-    if (!req.file) {
-      res.status(404).send('No file upload')
-      return
-    }
-    res.status(200).send({ message: req.file.path })
+    const { statusCode, data } = controller.uploadCloudinary(req)
+    return showResult(res, statusCode, data)
   })
 )
 
 utilRouter.get(
   '/cloudinary-delete/:imageId',
   expressAsyncHandler(async (req, res) => {
-    const { imageId } = req.params
-    try {
-      const response = await cloudinary.uploader.destroy(imageId)
-      if (response.result === 'not found') {
-        return res.status(404).send({ message: 'Not found' })
-      }
-      return res.status(200).send({ message: 'Deleted image successfully' })
-    } catch (error) {
-      return res.status(500).send({ message: error.message })
-    }
+    const { statusCode, data } = await controller.deleteImageCloudinary(req)
+    return showResult(res, statusCode, data)
   })
 )
 

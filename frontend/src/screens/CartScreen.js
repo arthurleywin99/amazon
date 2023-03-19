@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { deleteFromCart, updateCart } from '../actions/cartActions'
 
 function CartScreen() {
@@ -29,33 +29,35 @@ function CartScreen() {
   return (
     <div className='mx-auto container'>
       <div className='grid grid-cols-[minmax(500px,_1fr)_300px] mt-[15px] gap-4'>
-        {cartItems.length > 0 ? (
+        {cartItems && cartItems.length > 0 ? (
           <div>
             {cartItems.map((item, index) => (
               <div
                 key={index}
                 className='grid grid-cols-[150px_minmax(0,_1fr)_180px] rounded border border-solid border-[#ccc] px-[5px] pb-[10px] pt-[5px]'
               >
-                <div className='flex items-center'>
+                <Link to={`/product/${item.product}`} className='flex items-center'>
                   <img
                     className='align-middle transition duration-700 hover:transition hover:-translate-y-3 hover:duration-700'
                     src={item.images[0]}
                     alt={item.name}
                   />
-                </div>
+                </Link>
                 <div>
-                  <div className='text-[20px] font-bold mb-[10px]'>
+                  <Link
+                    to={`/product/${item.product}`}
+                    className='text-[20px] font-bold mb-[10px] text-[#000] hover:text-violet-900'
+                  >
                     {item.name}
-                  </div>
+                  </Link>
                   <div className='text-[16px] font-bold mb-[5px]'>
                     Số lượng:{' '}
                     <input
                       className='text-green-500 border boder-solid border-[#ccc] rounded w-1/5 text-center'
                       type='number'
                       value={item.qty}
-                      onChange={(e) =>
-                        changeQtyHandler(item.product, e.target.value)
-                      }
+                      onChange={(e) => changeQtyHandler(item.product, e.target.value)}
+                      onWheel={(e) => e.currentTarget.blur()}
                     ></input>
                   </div>
                   <div className='text-[16px] font-bold mb-[5px]'>
@@ -70,30 +72,27 @@ function CartScreen() {
                   <div className='text-[16px] font-bold mb-[5px]'>
                     Giá bán:{' '}
                     <span className='text-blue-500'>
-                      {(
-                        item.price +
-                        (item.price * item.discount) / 100
-                      ).toLocaleString('it-IT', {
+                      {(item.price + (item.price * item.discount) / 100).toLocaleString('it-IT', {
                         style: 'currency',
                         currency: 'VND',
                       })}
                     </span>
                   </div>
                   <button
-                    className='border border-solid rounded bg-rose-600 text-[16px] p-[5px] text-white'
+                    className='border border-solid rounded bg-rose-600 text-[16px] p-[5px] text-white hover:cursor-pointer hover:bg-rose-700'
                     onClick={() => deleteItemFromCartHandler(item.product)}
                   >
                     Xoá khỏi giỏ hàng
                   </button>
                 </div>
                 <span className='text-red-500 text-[22px] font-bold'>
-                  {(
-                    (item.price + (item.price * item.discount) / 100) *
-                    item.qty
-                  ).toLocaleString('it-IT', {
-                    style: 'currency',
-                    currency: 'VND',
-                  })}
+                  {((item.price + (item.price * item.discount) / 100) * item.qty).toLocaleString(
+                    'it-IT',
+                    {
+                      style: 'currency',
+                      currency: 'VND',
+                    }
+                  )}
                 </span>
               </div>
             ))}
@@ -120,8 +119,7 @@ function CartScreen() {
                   (acc, item) =>
                     acc +
                     Number(item.qty) *
-                      (Number(item.price) +
-                        (Number(item.price) * Number(item.discount)) / 100),
+                      (Number(item.price) + (Number(item.price) * Number(item.discount)) / 100),
                   0
                 )
                 .toLocaleString('it-IT', {
@@ -142,8 +140,7 @@ function CartScreen() {
                   (acc, item) =>
                     acc +
                     Number(item.qty) *
-                      (Number(item.price) +
-                        (Number(item.price) * Number(item.discount)) / 100),
+                      (Number(item.price) + (Number(item.price) * Number(item.discount)) / 100),
                   0
                 )
                 .toLocaleString('it-IT', {
@@ -153,8 +150,13 @@ function CartScreen() {
             </p>
           </div>
           <button
-            className='bg-amber-300	w-full text-neutral-700	text-[18px] rounded p-[5px] font-bold'
+            className={`${
+              !cartItems || cartItems.length === 0
+                ? 'bg-gray-300'
+                : 'bg-amber-300 hover:bg-amber-400'
+            }	w-full text-neutral-700	text-[18px] rounded p-[5px] font-bold hover:cursor-pointer`}
             onClick={checkOutHandler}
+            disabled={!cartItems || cartItems.length === 0}
           >
             Đặt hàng
           </button>

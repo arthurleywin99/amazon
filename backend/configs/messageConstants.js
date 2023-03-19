@@ -1,0 +1,26 @@
+export default {
+  EMAIL_EXIST: 'This email address is already exists, try with a different email address',
+  PHONE_EXIST: 'This phone number is already exists, try with a different phone number',
+  WRONG_EMAIL_FORMAT: 'Invalid email address',
+  SIGNUP_MAILING_SUBJECT: 'Xin chào! Yêu cầu kích hoạt tài khoản',
+  SIGNUP_MAILING_HTML:
+    '<p>Xin chào %s. Hệ thống đã gửi yêu cầu kích hoạt tài khoản, vui lòng nhấn vào link sau để kích hoạt tài khoản của bạn. Link sẽ hết hạn trong 30 phút nữa. Trân trọng</p><p>%s</p>',
+  SEND_MAIL_ERROR: 'There was an error sending mail to activated. Please check again',
+  TOKEN_EXPIRED: 'Token is expired',
+  VERIFIED_SUCCESS: 'User verified successfully',
+  USER_NOT_FOUND: 'User not found',
+  PRODUCT_NOT_FOUND: 'Product not found',
+  IMAGE_NOT_FOUND: 'Image not found',
+  NO_TOKEN: 'No token',
+  USERNAME_REQUIRED: 'Username is required',
+  PASSWORD_LENGTH_MISMATCH: 'Password must be at least %s characters',
+  SIGNIN_INVALID_EMAIL_PASSWORD: 'Invalid email or password',
+  NO_FILE_UPLOAD: 'No file upload',
+  DELETED_IMAGE_SUCCESS: 'Deleted image successfully',
+  NEW_ORDER_MAILING_SUBJECT: 'No reply - Đơn hàng mới được đặt từ Amazon',
+  NEW_ORDER_MAILING_HTML:
+    '<p>Xin chào %s. Hệ thống đã nhận được đơn hàng mà bạn đã đặt trên website của chúng tôi như sau:<br /></p><p><strong>Tài khoản đặt: %s</strong></p><p><strong>Số sản phẩm: %s</strong></p><p><strong>Số tiền: %s</strong></p><p><strong>Hình thức thanh toán: %s</strong></p><br /><p>Mọi thắc mắc xin liên hệ số điện thoại: 0354321915</p>',
+  CREATE_ORDER_SUCCESS: 'Create order successfully',
+  CREATE_ORDER_FAIL: 'Create failure',
+  ORDER_NOT_FOUND: 'Order not found',
+}

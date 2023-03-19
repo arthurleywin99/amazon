@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductByCategory } from '../actions/productActions'
-import { SMARTWATCH } from '../constants/categoryConstants'
-import { Brands, ProductList } from '../components/shared/index'
+import { getProductByCategory } from '../../actions/productActions'
+import { TABLETS } from '../../constants/categoryConstants'
+import { Brands, ProductList } from '../shared/index'
 
-function SmartwatchScreen() {
+function TabletComponent() {
   const dispatch = useDispatch()
-  const { products, loading, error } = useSelector(
-    (state) => state.getProductByCategory
-  )
+  const { products, loading, error } = useSelector((state) => state.getProductByCategory)
 
   const [brands, setBrands] = useState([])
 
   useEffect(() => {
-    dispatch(getProductByCategory({ category: SMARTWATCH, order: 'discount' }))
+    dispatch(getProductByCategory({ category: TABLETS, order: 'discount' }))
   }, [dispatch])
 
   useEffect(() => {
@@ -37,9 +35,9 @@ function SmartwatchScreen() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={SMARTWATCH} />}
+      {products && <ProductList category={TABLETS} />}
     </div>
   )
 }
 
-export default SmartwatchScreen
+export default TabletComponent

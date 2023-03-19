@@ -34,26 +34,28 @@ export const userRegisterSchema = Yup.object({
       },
     }),
   email: Yup.string()
-    .required(
-      'Bạn sẽ sử dụng thông tin này khi đăng nhập và khi cần đặt lại mật khẩu'
-    )
+    .required('Bạn sẽ sử dụng thông tin này khi đăng nhập và khi cần đặt lại mật khẩu')
     .email('Không đúng định dạng email'),
+  phoneNumber: Yup.string()
+    .required('Bạn sẽ sử dụng thông tin này khi đăng nhập và khi cần đặt lại mật khẩu')
+    .test({
+      name: 'Phone number pattern',
+      exclusive: false,
+      params: {},
+      message: 'Số điện thoại không đúng dịnh dạng',
+      test: function (value) {
+        return isMobilePhone(value.toString())
+      },
+    }),
   password: Yup.string()
     .required('Bạn sẽ sử dụng thông tin này khi đăng nhập')
-    .min(
-      6,
-      'Nhập mật khẩu có tối thiểu 6 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)'
-    )
-    .max(
-      36,
-      'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)'
-    )
+    .min(6, 'Nhập mật khẩu có tối thiểu 6 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)')
+    .max(36, 'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)')
     .test({
       name: 'Password pattern',
       exclusive: false,
       params: {},
-      message:
-        'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)',
+      message: 'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)',
       test: function (value) {
         const myRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/
         return myRegex.test(value.toString())
@@ -66,8 +68,7 @@ export const userRegisterSchema = Yup.object({
     name: 'At least 13 years old',
     exclusive: false,
     params: {},
-    message:
-      'Hình như bạn đã nhập sai thông tin. Hãy nhớ dùng ngày sinh nhật thật của mình nhé',
+    message: 'Hình như bạn đã nhập sai thông tin. Hãy nhớ dùng ngày sinh nhật thật của mình nhé',
     test: function () {
       const currentDate = new Date()
       const pickedDate = new Date(
@@ -87,8 +88,7 @@ export const userRegisterSchema = Yup.object({
     name: 'No more than 70 years old',
     exclusive: false,
     params: {},
-    message:
-      'Hình như bạn đã nhập sai thông tin. Hãy nhớ dùng ngày sinh nhật thật của mình nhé',
+    message: 'Hình như bạn đã nhập sai thông tin. Hãy nhớ dùng ngày sinh nhật thật của mình nhé',
     test: function () {
       const currentDate = new Date()
       const pickedDate = new Date(
@@ -121,20 +121,13 @@ export const userLoginSchema = Yup.object({
     }),
   password: Yup.string()
     .required('Bạn sẽ sử dụng thông tin này khi đăng nhập')
-    .min(
-      6,
-      'Nhập mật khẩu có tối thiểu 6 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)'
-    )
-    .max(
-      36,
-      'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)'
-    )
+    .min(6, 'Nhập mật khẩu có tối thiểu 6 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)')
+    .max(36, 'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)')
     .test({
       name: 'Password pattern',
       exclusive: false,
       params: {},
-      message:
-        'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)',
+      message: 'Nhập mật khẩu có tối đa 36 ký tự bao gồm số, chữ cái và dấu chấm câu (như ! và &)',
       test: function (value) {
         const myRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/
         return myRegex.test(value.toString())

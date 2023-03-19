@@ -2,6 +2,7 @@ import {
   CART_ADD_ITEM,
   CART_ADD_ITEM_FAIL,
   CART_DELETE_ITEM,
+  CART_EMPTY,
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_UPDATE_ITEM,
@@ -12,36 +13,27 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM: {
       const item = action.payload
-      const isExistItem = state.cartItems.find(
-        (x) => x.product === item.product
-      )
+      const isExistItem = state.cartItems.find((x) => x.product === item.product)
       if (isExistItem) {
-        if (item.qty + isExistItem.qty > isExistItem.countInStock) {
+        if (Number(item.qty) + Number(isExistItem.qty) > Number(isExistItem.countInStock)) {
           return {
             ...state,
             cartItems: state.cartItems.map((x) =>
-              x.product === item.product
-                ? { ...x, qty: Number(x.countInStock) }
-                : x
+              x.product === item.product ? { ...x, qty: Number(x.countInStock) } : x
             ),
           }
         }
         return {
           ...state,
           cartItems: state.cartItems.map((x) =>
-            x.product === item.product
-              ? { ...x, qty: Number(x.qty) + Number(item.qty) }
-              : x
+            x.product === item.product ? { ...x, qty: Number(x.qty) + Number(item.qty) } : x
           ),
         }
       } else {
         if (item.qty > item.countInStock) {
           return {
             ...state,
-            cartItems: [
-              ...state.cartItems,
-              { ...item, qty: item.countInStock },
-            ],
+            cartItems: [...state.cartItems, { ...item, qty: Number(item.countInStock) }],
           }
         }
         return {
@@ -55,17 +47,13 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     }
     case CART_UPDATE_ITEM: {
       const item = action.payload
-      const isExistItem = state.cartItems.find(
-        (x) => x.product === item.product
-      )
+      const isExistItem = state.cartItems.find((x) => x.product === item.product)
       if (isExistItem) {
-        if (item.newQty > isExistItem.countInStock) {
+        if (Number(item.newQty) > Number(isExistItem.countInStock)) {
           return {
             ...state,
             cartItems: state.cartItems.map((x) =>
-              x.product === item.product
-                ? { ...x, qty: Number(x.countInStock) }
-                : x
+              x.product === item.product ? { ...x, qty: Number(x.countInStock) } : x
             ),
           }
         }
@@ -104,6 +92,9 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         ...state,
         payment,
       }
+    }
+    case CART_EMPTY: {
+      return { cartItems: [] }
     }
     default: {
       return state

@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import nodemailer from 'nodemailer'
+import msg from '../configs/messageConstants.js'
+import util from 'util'
 
 dotenv.config()
 
@@ -50,4 +53,31 @@ export const sortObject = (obj) => {
     sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, '+')
   }
   return sorted
+}
+
+export const showResult = (res, statusCode, data) => {
+  res.status(statusCode).json(data)
+}
+
+export const sendMailActivate = (res, mailOptions) => {
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.MAILING_ADDRESS,
+      pass: process.env.MAILING_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  })
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return showResult(res, 400, {
+        message: msg.SEND_MAIL_ERROR,
+      })
+    }
+  })
 }

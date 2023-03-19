@@ -75,10 +75,12 @@ function Header() {
               </Link>
               <Link className='text-[22px] relative w-auto m-[10px]' to='/cart'>
                 <span className='absolute text-[16px] text-[#f08804] font-bold top-[-12px] left-[10px]'>
-                  {cartItems.reduce(
-                    (acc, item) => Number(acc) + Number(item.qty),
-                    0
-                  )}
+                  {cartItems && cartItems.length > 0
+                    ? cartItems.reduce(
+                        (acc, item) => Number(acc) + Number(item.qty),
+                        0
+                      )
+                    : 0}
                 </span>
                 <FontAwesome icon='fab fa-opencart' color='#fff' />
                 <span className='text-[14px] font-bold'>Giỏ hàng</span>

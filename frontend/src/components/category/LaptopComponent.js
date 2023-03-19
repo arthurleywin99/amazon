@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductByCategory } from '../actions/productActions'
-import { Brands, ProductList } from '../components/shared/index'
-import { USED_PHONE } from '../constants/categoryConstants'
+import { getProductByCategory } from '../../actions/productActions'
+import { LAPTOPS } from '../../constants/categoryConstants'
+import { Brands, ProductList } from '../shared/index'
 
-function UsedphoneScreen() {
+function LaptopComponent() {
   const dispatch = useDispatch()
-  const { products, loading, error } = useSelector(
-    (state) => state.getProductByCategory
-  )
+  const { products, loading, error } = useSelector((state) => state.getProductByCategory)
 
   const [brands, setBrands] = useState([])
 
   useEffect(() => {
-    dispatch(getProductByCategory({ category: USED_PHONE, order: 'discount' }))
+    dispatch(getProductByCategory({ category: LAPTOPS, order: 'discount' }))
   }, [dispatch])
 
   useEffect(() => {
@@ -37,9 +35,9 @@ function UsedphoneScreen() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={USED_PHONE} />}
+      {products && <ProductList category={LAPTOPS} />}
     </div>
   )
 }
 
-export default UsedphoneScreen
+export default LaptopComponent

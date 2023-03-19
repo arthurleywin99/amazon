@@ -29,9 +29,7 @@ function SignupForm({ setShowForm }) {
 
   const [birthDate, setBirthDate] = useState(birthDateInfo)
 
-  const { userRegister, loading, error } = useSelector(
-    (state) => state.userRegister
-  )
+  const { userRegister, loading, error } = useSelector((state) => state.userRegister)
 
   const {
     register,
@@ -43,10 +41,7 @@ function SignupForm({ setShowForm }) {
 
   const { bDay, bMonth, bYear } = birthDate
 
-  const years = Array.from(
-    new Array(118),
-    (value, index) => new Date().getFullYear() - index
-  )
+  const years = Array.from(new Array(118), (value, index) => new Date().getFullYear() - index)
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   const days = Array.from(
     new Array(new Date(bYear, bMonth, 0).getDate()),
@@ -136,6 +131,22 @@ function SignupForm({ setShowForm }) {
           {errors.email && (
             <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[33%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
               {errors.email?.message}
+            </div>
+          )}
+
+          <input
+            {...register('phoneNumber')}
+            className={`w-[330px] text-[17px] leading-4 py-[12px] px-4 my-2.5 rounded-md border border-solid border-borderbtn focus:border focus:border-solid focus:border-btn focus:outline-none ${
+              errors.phoneNumber &&
+              'border border-solid border-danger focus:border focus:border-solid focus:border-danger'
+            }`}
+            type='text'
+            placeholder='Nhập số điện thoại'
+          />
+
+          {errors.phoneNumber && (
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[33%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
+              {errors.phoneNumber?.message}
             </div>
           )}
 
@@ -230,59 +241,32 @@ function SignupForm({ setShowForm }) {
             <div className='flex justify-between px-[5px]'>
               <div
                 className={`text-[17px] w-3/10 py-2.5 rounded-md border border-solid border-borderbtn bg-white ${
-                  errors.gender &&
-                  'border border-solid border-danger rounded-md'
+                  errors.gender && 'border border-solid border-danger rounded-md'
                 }`}
               >
-                <label
-                  className='flex justify-between align-center px-2.5'
-                  htmlFor='female'
-                >
+                <label className='flex justify-between align-center px-2.5' htmlFor='female'>
                   Nữ
-                  <input
-                    {...register('gender')}
-                    id='female'
-                    type='radio'
-                    value='Female'
-                  />
+                  <input {...register('gender')} id='female' type='radio' value='Female' />
                 </label>
               </div>
               <div
                 className={`text-[17px] w-3/10 py-2.5 rounded-md border border-solid border-borderbtn bg-white ${
-                  errors.gender &&
-                  'border border-solid border-danger rounded-md'
+                  errors.gender && 'border border-solid border-danger rounded-md'
                 }`}
               >
-                <label
-                  className='flex justify-between align-center px-2.5'
-                  htmlFor='male'
-                >
+                <label className='flex justify-between align-center px-2.5' htmlFor='male'>
                   Nam
-                  <input
-                    {...register('gender')}
-                    id='male'
-                    type='radio'
-                    value='Male'
-                  />
+                  <input {...register('gender')} id='male' type='radio' value='Male' />
                 </label>
               </div>
               <div
                 className={`text-[17px] w-3/10 py-2.5 rounded-md border border-solid border-borderbtn bg-white ${
-                  errors.gender &&
-                  'border border-solid border-danger rounded-md'
+                  errors.gender && 'border border-solid border-danger rounded-md'
                 }`}
               >
-                <label
-                  className='flex justify-between align-center px-2.5'
-                  htmlFor='other'
-                >
+                <label className='flex justify-between align-center px-2.5' htmlFor='other'>
                   Khác
-                  <input
-                    {...register('gender')}
-                    id='other'
-                    type='radio'
-                    value='Other'
-                  />
+                  <input {...register('gender')} id='other' type='radio' value='Other' />
                 </label>
               </div>
             </div>
@@ -295,9 +279,9 @@ function SignupForm({ setShowForm }) {
           )}
 
           <p className='text-justify p-2.5 text-xs text-gray7'>
-            Bằng cách nhấp vào Đăng ký, bạn đồng ý với Điều khoản, Chính sách
-            quyền riêng tư và Chính sách của chúng tôi. Bạn có thể nhận được
-            thông báo của chúng tôi qua email và hủy nhận bất kỳ lúc nào
+            Bằng cách nhấp vào Đăng ký, bạn đồng ý với Điều khoản, Chính sách quyền riêng tư và
+            Chính sách của chúng tôi. Bạn có thể nhận được thông báo của chúng tôi qua email và hủy
+            nhận bất kỳ lúc nào
           </p>
 
           <button

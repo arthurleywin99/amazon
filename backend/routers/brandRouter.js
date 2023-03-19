@@ -1,15 +1,15 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
-import Brand from '../models/brandModel.js'
-import { brandSeed } from '../data.js'
+import controller from '../controllers/brandController.js'
+import { showResult } from '../utils/utils.js'
 
 const brandRouter = express.Router()
 
 brandRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-    const brand = await Brand.insertMany(brandSeed)
-    return res.status(500).json(brand)
+    const { statusCode, data } = await controller.seed()
+    return showResult(res, statusCode, data)
   })
 )
 

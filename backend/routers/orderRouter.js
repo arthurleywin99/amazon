@@ -1,11 +1,12 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
-import { isAuth, sortObject } from '../utils/utils.js'
+import { isAuth, showResult, sortObject } from '../utils/utils.js'
 import querystring from 'qs'
 import crypto from 'crypto'
 import dotenv from 'dotenv'
 import dateFormat from 'dateformat'
 import Order from '../models/orderModel.js'
+import controller from '../controllers/orderController.js'
 
 dotenv.config()
 
@@ -29,8 +30,7 @@ orderRouter.post('/create_payment_url', function (req, res, next) {
   vnp_Params['vnp_Locale'] = 'vn'
   vnp_Params['vnp_CurrCode'] = 'VND'
   vnp_Params['vnp_TxnRef'] = dateFormat(new Date(), 'HHmmss')
-  vnp_Params['vnp_OrderInfo'] =
-    'Thanh toan cho ma GD:' + dateFormat(new Date(), 'HHmmss')
+  vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + dateFormat(new Date(), 'HHmmss')
   vnp_Params['vnp_OrderType'] = 'other'
   vnp_Params['vnp_Amount'] = req.body.amount * 100
   vnp_Params['vnp_ReturnUrl'] = process.env.VNP_RETURN_URL
@@ -55,25 +55,16 @@ orderRouter.post(
   '/create',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    try {
-      const orderCreated = await new Order({
-        user: req.body.user,
-        orderItems: req.body.orderItems,
-        shippingInformation: req.body.shippingInformation,
-        payment: req.body.payment,
-        price: req.body.price,
-        taxPrice: req.body.taxPrice,
-      }).save()
+    const { statusCode, data } = await controller.create(req, res)
+    return showResult(res, statusCode, data)
+  })
+)
 
-      if (orderCreated) {
-        return res
-          .status(200)
-          .json({ message: 'Create order successfully', orderCreated })
-      }
-      return res.status(401).json({ message: 'Created failure' })
-    } catch (error) {
-      return res.status(500).json({ message: error.message })
-    }
+orderRouter.get(
+  '/:id',
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.getById(req)
+    return showResult(res, statusCode, data)
   })
 )
 

@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductByCategory } from '../actions/productActions'
-import { CELLPHONES } from '../constants/categoryConstants'
-import Brands from '../components/shared/Brands'
-import ProductList from '../components/shared/ProductList'
-
-function CellphoneScreen() {
+import { getProductByCategory } from '../../actions/productActions'
+import { WATCH } from '../../constants/categoryConstants'
+import { Brands, ProductList } from '../shared/index'
+function WatchComponent() {
   const dispatch = useDispatch()
-  const { products, loading, error } = useSelector(
-    (state) => state.getProductByCategory
-  )
+  const { products, loading, error } = useSelector((state) => state.getProductByCategory)
 
   const [brands, setBrands] = useState([])
 
   useEffect(() => {
-    dispatch(getProductByCategory({ category: CELLPHONES, order: 'discount' }))
+    dispatch(getProductByCategory({ category: WATCH, order: 'discount' }))
   }, [dispatch])
 
   useEffect(() => {
@@ -38,9 +34,9 @@ function CellphoneScreen() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={CELLPHONES} />}
+      {products && <ProductList category={WATCH} />}
     </div>
   )
 }
 
-export default CellphoneScreen
+export default WatchComponent

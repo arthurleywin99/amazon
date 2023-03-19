@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { savePayment } from '../../actions/cartActions'
 
 function PaymentComponent() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [clientId, setClientId] = useState(null)
+  const [error, setError] = useState(null)
+
+  const { cartItems, shippingAddress, payment } = useSelector(
+    (state) => state.cart
+  )
+
+  useEffect(() => {
+    if (payment) {
+      navigate('/checkout?step=order-confirmation')
+    }
+    if (!shippingAddress) {
+      navigate('/checkout?step=shipping-address')
+    }
+    if (cartItems.length === 0) {
+      navigate('/')
+    }
+  }, [])
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/config/paypal`)
@@ -15,7 +32,18 @@ function PaymentComponent() {
       .then((data) => setClientId(data.message))
   }, [])
 
-  return (
+  const codPaymentHandler = () => {
+    dispatch(
+      savePayment({
+        method: 'COD',
+      })
+    )
+    navigate('/checkout?step=order-confirmation')
+  }
+
+  return error ? (
+    <div>Error</div>
+  ) : (
     <div className='w-full flex justify-center mt-[20px]'>
       <div>
         <div className='text-[20px] mb-[14px]'>
@@ -25,6 +53,7 @@ function PaymentComponent() {
           <button
             type='button'
             className='text-center w-full rounded-[23px] border border-solid h-[45px] bg-[#888] text-white text-[18px] mb-[14px]'
+            onClick={codPaymentHandler}
           >
             Thanh toán khi nhận hàng
           </button>
@@ -65,7 +94,7 @@ function PaymentComponent() {
                   })
                 }}
                 onError={(err) => {
-                  console.log(err)
+                  setError(err)
                 }}
               />
             </PayPalScriptProvider>
