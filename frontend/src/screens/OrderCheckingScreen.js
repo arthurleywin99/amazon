@@ -31,19 +31,25 @@ function OrderCheckingScreen() {
             className='h-[40px] w-[40px] bg-sky-500 border-none text-base font-bold rounded-tr rounded-br hover:bg-sky-700'
             onClick={orderSearchHandler}
           >
-            <FontAwesome icon='fas fa-search' color='#fff' />
+            {loading ? (
+              loading && <FontAwesome icon='animate-spin fal fa-circle-notch' />
+            ) : (
+              <FontAwesome icon='fas fa-search' color='#fff' />
+            )}
           </button>
         </div>
       </div>
-      {loading ? (
-        <div>Loading</div>
-      ) : error ? (
-        <div>{error}</div>
+      {error ? (
+        <div className='mt-[20px]'>
+          <span className='bg-rose-600 text-white text-[18px] p-[10px] rounded italic'>
+            Không tìm thấy đơn hàng, vui lòng kiểm tra lại
+          </span>
+        </div>
       ) : (
         <>
           {order && (
             <div className='flex justify-center'>
-              <table className='table-auto text-start text-[16px]'>
+              <table className='table-auto text-start text-[16px] mt-[20px]'>
                 <tbody>
                   <tr>
                     <td className='border border-slate-600 px-[10px] py-[15px]'>Tên người đặt</td>
@@ -67,9 +73,11 @@ function OrderCheckingScreen() {
                   </tr>
                   <tr>
                     <td className='border border-slate-600 px-[10px] py-[15px]'>
-                      Hình thức thanh toánh
+                      Hình thức thanh toán
                     </td>
-                    <td className='border border-slate-600'>{order.payment?.method}</td>
+                    <td className='border border-slate-600 px-[10px] py-[15px]'>
+                      {order.payment?.method}
+                    </td>
                   </tr>
                   {order.payment.method !== 'COD' && (
                     <>

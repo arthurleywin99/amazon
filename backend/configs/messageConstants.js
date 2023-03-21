@@ -23,4 +23,5 @@ export default {
   CREATE_ORDER_SUCCESS: 'Create order successfully',
   CREATE_ORDER_FAIL: 'Create failure',
   ORDER_NOT_FOUND: 'Order not found',
+  SEARCH_TEXT_REQUIRED: 'Search text required',
 }

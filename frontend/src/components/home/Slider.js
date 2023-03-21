@@ -22,12 +22,8 @@ function Slider({ banner, data }) {
       counterRef.current--
     }
     setImages({
-      left: data.filter(
-        (item) => item.name === `Slider ${counterRef.current + 1}`
-      )[0].image,
-      right: data.filter(
-        (item) => item.name === `Slider ${counterRef.current + 2}`
-      )[0].image,
+      left: data.filter((item) => item.name === `Slider ${counterRef.current + 1}`)[0].image,
+      right: data.filter((item) => item.name === `Slider ${counterRef.current + 2}`)[0].image,
     })
   }
 
@@ -38,12 +34,8 @@ function Slider({ banner, data }) {
       counterRef.current++
     }
     setImages({
-      left: data.filter(
-        (item) => item.name === `Slider ${counterRef.current + 1}`
-      )[0].image,
-      right: data.filter(
-        (item) => item.name === `Slider ${counterRef.current + 2}`
-      )[0].image,
+      left: data.filter((item) => item.name === `Slider ${counterRef.current + 1}`)[0].image,
+      right: data.filter((item) => item.name === `Slider ${counterRef.current + 2}`)[0].image,
     })
   }
 
@@ -55,8 +47,8 @@ function Slider({ banner, data }) {
       }}
     >
       <div className='w-full flex items-center justify-center absolute bottom-0 translate-y-1/2'>
-        <div className='main__button-prev' onClick={handlePrev}>
-          <FontAwesome icon='far fa-chevron-left' color='#000' />
+        <div className='main__button-prev hover:cursor-pointer' onClick={handlePrev}>
+          <FontAwesome icon='far fa-chevron-left hover:bg-sky-200' color='#000' />
         </div>
         <img
           className='w-[600px] h-[180px] rounded-[12px] mr-[5px]'
@@ -68,8 +60,8 @@ function Slider({ banner, data }) {
           src={images.right}
           alt='Slider 2'
         />
-        <div className='main__button-next' onClick={handleNext}>
-          <FontAwesome icon='far fa-chevron-right' color='#000' />
+        <div className='main__button-next hover:cursor-pointer' onClick={handleNext}>
+          <FontAwesome icon='far fa-chevron-right hover:bg-sky-200' color='#000' />
         </div>
       </div>
     </div>

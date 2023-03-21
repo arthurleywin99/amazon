@@ -35,7 +35,7 @@ function TabletComponent() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={TABLETS} />}
+      {products && <ProductList products={products} />}
     </div>
   )
 }

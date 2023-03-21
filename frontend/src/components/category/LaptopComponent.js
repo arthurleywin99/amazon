@@ -35,7 +35,7 @@ function LaptopComponent() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={LAPTOPS} />}
+      {products && <ProductList products={products} />}
     </div>
   )
 }

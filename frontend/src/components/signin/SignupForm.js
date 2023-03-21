@@ -288,7 +288,7 @@ function SignupForm({ setShowForm }) {
             className='w-[330px] text-base border-none rounded-md bg-btn text-gray5 font-bold py-[15px] my-[2px] hover:cursor-pointer hover:bg-amber-500 hover:text-black'
             type='submit'
           >
-            Đăng ký
+            {loading && <FontAwesome icon='animate-spin fal fa-circle-notch' />} Đăng ký
           </button>
         </form>
       </div>

@@ -8,16 +8,13 @@ import utilRouter from './routers/utilRouter.js'
 import webInfoRouter from './routers/webInfoRouter.js'
 import userRouter from './routers/userRouter.js'
 import orderRouter from './routers/orderRouter.js'
+import searchRouter from './routers/searchRouter.js'
 
 dotenv.config()
 
 const app = express()
 
-let allowed = [
-  'http://localhost:3000',
-  'http://localhost:8080',
-  'https://sandbox.vnpayment.vn',
-]
+let allowed = ['http://localhost:3000', 'http://localhost:8080', 'https://sandbox.vnpayment.vn']
 
 function options(req, res) {
   let tmp
@@ -66,6 +63,7 @@ app.use('/api/utils', utilRouter)
 app.use('/api/webinfos', webInfoRouter)
 app.use('/api/users', userRouter)
 app.use('/api/orders', orderRouter)
+app.use('/api/search', searchRouter)
 app.get('/api/config/paypal', (req, res) => {
   res.status(200).send({ message: process.env.PAYPAL_CLIENT_ID || 'sb' })
 })

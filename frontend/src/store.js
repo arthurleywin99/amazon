@@ -8,6 +8,7 @@ import {
   getProductTopDiscountReducer,
   getSamsungTopDiscountReducer,
 } from './reducers/productReducers'
+import { searchProductReducer } from './reducers/searchReducers'
 import { userRegisterReducer, userLoginReducer } from './reducers/userReducers'
 import { getWebInfoReducer } from './reducers/webInfoReducers'
 
@@ -35,6 +36,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   createOrder: createOrderReducer,
   searchOrder: searchOrderByIdReducer,
+  searchProduct: searchProductReducer,
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

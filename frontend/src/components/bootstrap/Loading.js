@@ -3,27 +3,9 @@ import React from 'react'
 function Loading() {
   return (
     <>
-      <div className='spinner-grow text-primary' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
-      <div className='spinner-grow text-secondary' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
-      <div className='spinner-grow text-success' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
-      <div className='spinner-grow text-danger' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
-      <div className='spinner-grow text-warning' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
-      <div className='spinner-grow text-info' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
-      <div className='spinner-grow text-dark' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
+      <button type='button' class='bg-white' disabled>
+        <svg class='animate-spin h-5 w-5 mr-3 bg-rose-500' viewBox='0 0 24 24'></svg>
+      </button>
     </>
   )
 }

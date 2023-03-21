@@ -35,7 +35,7 @@ function SmartwatchComponent() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={SMARTWATCH} />}
+      {products && <ProductList products={products} />}
     </div>
   )
 }

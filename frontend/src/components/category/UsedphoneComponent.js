@@ -35,7 +35,7 @@ function UsedphoneComponent() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={USED_PHONE} />}
+      {products && <ProductList products={products} />}
     </div>
   )
 }

@@ -34,7 +34,7 @@ function WatchComponent() {
   ) : (
     <div>
       {brands && <Brands brands={brands} />}
-      {products && <ProductList category={WATCH} />}
+      {products && <ProductList products={products} />}
     </div>
   )
 }

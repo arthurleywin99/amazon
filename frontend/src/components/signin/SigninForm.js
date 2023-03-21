@@ -4,10 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { userLoginSchema } from '../utils/Schema'
-import Loading from '../bootstrap/Loading'
 import Message from '../bootstrap/Message'
 import { USER_REGISTER_RESET } from '../../constants/userConstants'
 import { signin } from '../../actions/userActions'
+import FontAwesome from '../utils/FontAwesome'
 
 function SigninForm({ setShowForm }) {
   const dispatch = useDispatch()
@@ -54,12 +54,8 @@ function SigninForm({ setShowForm }) {
       >
         <h1 className='text-3xl font-bold'>Đăng nhập</h1>
 
-        {loading && <Loading />}
         {userRegister && firstTouchedRef.current && (
-          <Message
-            message='Đăng ký thành công, vui lòng đăng nhập'
-            color='success'
-          />
+          <Message message='Đăng ký thành công, vui lòng đăng nhập' color='success' />
         )}
         {error && <Message message={error} color='danger' />}
 
@@ -100,7 +96,7 @@ function SigninForm({ setShowForm }) {
           className='block m-auto w-80 text-base border-none rounded bg-amber-400 text-slate-600 font-bold py-4 my-5 hover:cursor-pointer hover:bg-amber-500 hover:text-black'
           type='submit'
         >
-          Đăng nhập
+          {loading && <FontAwesome icon='animate-spin fal fa-circle-notch' />} Đăng nhập
         </button>
         <Link className='text-blue-700 text-sm' to='/'>
           Quên mật khẩu?

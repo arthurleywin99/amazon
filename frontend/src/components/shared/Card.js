@@ -23,11 +23,7 @@ function Card({ product }) {
           transition: 'all .7s',
         }}
       >
-        <img
-          className='w-[207px] h-[207px]'
-          src={product.images[0]}
-          alt={product.name}
-        />
+        <img className='w-[207px] h-[207px]' src={product.images[0]} alt={product.name} />
         {product.isMonolopy && (
           <img
             className='w-[40px] h-[40px] absolute bottom-[-6px] left-[5px]'
@@ -45,10 +41,7 @@ function Card({ product }) {
         </p>
         <p className='text-start'>
           <span className='text-start mb-[8px] text-[#d0021c] font-bold inline-block text-[20px]'>
-            {(
-              product.price +
-              (product.price * product.discount) / 100
-            ).toLocaleString('it-IT', {
+            {(product.price + (product.price * product.discount) / 100).toLocaleString('it-IT', {
               style: 'currency',
               currency: 'VND',
             })}
@@ -70,13 +63,9 @@ function Card({ product }) {
             {product.rating.average}&nbsp;&nbsp;
             <FontAwesome icon='fas fa-star' />
           </span>
-          <span className='text-[#999] text-[14px]'>
-            ({product.rating.quantity})
-          </span>
+          <span className='text-[#999] text-[14px]'>({product.rating.quantity})</span>
         </p>
-        <p className='mb-[8px] text-start text-[#666] text-[14px]'>
-          {product.description}
-        </p>
+        <p className='mb-[8px] text-start text-[#666] text-[14px]'>{product.description}</p>
       </div>
     </div>
   )
