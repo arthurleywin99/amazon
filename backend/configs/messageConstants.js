@@ -41,4 +41,5 @@ export default {
   RATING_NUMBER_ERROR: 'Invalid rating number. It must be between 0 and 5',
   UPDATE_SUCCESS: 'Update successfully',
   UPDATE_ERROR: 'Update failure',
+  BRAND_NOT_FOUND: 'Brand not found',
 }

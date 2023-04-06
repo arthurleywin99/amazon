@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { vnProvinces } from '../utils/VietNamProvinces.js'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { shippingAddressSchema } from '../utils/Schema'
+import { shippingAddressSchema } from '../utils/Schema.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { saveShippingAddress } from '../../actions/cartActions'
+import { saveShippingAddress } from '../../actions/cartActions.js'
 import { useNavigate } from 'react-router-dom'
 
 function ShippingAddressComponent() {

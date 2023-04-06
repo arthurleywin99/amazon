@@ -24,6 +24,15 @@ import ActivatedScreen from './screens/ActivatedScreen'
 import RatingScreen from './screens/RatingScreen'
 import PrivateRoute from './components/shared/PrivateRoute'
 import TokenRoute from './components/shared/TokenRoute'
+import AdminScreen from './screens/AdminScreen'
+import {
+  AdminAccountComponent,
+  AdminBrandComponent,
+  AdminOrderComponent,
+  AdminPermissionComponent,
+  AdminProductComponent,
+  AdminWebConfigComponent,
+} from './components/admin/index'
 
 function App() {
   return (
@@ -31,6 +40,15 @@ function App() {
       <div className='grid-container'>
         <Header />
         <Routes>
+          {/* ADMIN ROUTE */}
+          <Route path='/admin' element={<AdminScreen />}>
+            <Route path='products' element={<AdminProductComponent />} />
+            <Route path='brands' element={<AdminBrandComponent />} />
+            <Route path='orders' element={<AdminOrderComponent />} />
+            <Route path='accounts' element={<AdminAccountComponent />} />
+            <Route path='web-configs' element={<AdminWebConfigComponent />} />
+            <Route path='permissions' element={<AdminPermissionComponent />} />
+          </Route>
           {/* USER ROUTE */}
           <Route path='/' element={<HomeScreen />} />
           <Route path='/category' element={<CategoryScreen />}>
