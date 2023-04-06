@@ -71,7 +71,10 @@ function Header() {
           </button>
         </form>
         <div className='flex items-center justify-between'>
-          <Link className='text-[12px] w-auto mx-[10px]' to={userInfo ? '/my-account' : '/signin'}>
+          <Link
+            className='text-[12px] w-auto mx-[10px]'
+            to={userInfo ? '/my-account?option=account' : '/signin'}
+          >
             <span>
               {userInfo ? `Xin chào, ${userInfo.firstName}` : 'Đăng nhập'} <br />{' '}
               <strong className='text-[14px]'>Tài khoản</strong>

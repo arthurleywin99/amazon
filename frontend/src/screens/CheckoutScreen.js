@@ -5,7 +5,7 @@ import {
   PaymentComponent,
   OrderConfirmationComponent,
 } from '../components/checkout/index'
-import NotFoundScreen from './NotFoundScreen'
+import NotFound from '../components/shared/NotFound'
 
 function CheckoutScreen() {
   const [searchParams] = useSearchParams()
@@ -39,7 +39,7 @@ function CheckoutScreen() {
       ) : step === 3 ? (
         <OrderConfirmationComponent />
       ) : (
-        <NotFoundScreen />
+        <NotFound />
       )}
     </div>
   )

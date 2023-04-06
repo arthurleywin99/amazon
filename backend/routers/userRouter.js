@@ -1,6 +1,6 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
-import { generateToken, showResult } from '../utils/utils.js'
+import { generateToken, isAuth, showResult } from '../utils/utils.js'
 import controller from '../controllers/userController.js'
 
 const userRouter = express.Router()
@@ -17,6 +17,14 @@ userRouter.post(
   })
 )
 
+userRouter.post(
+  '/signin',
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.signIn(req)
+    showResult(res, statusCode, data)
+  })
+)
+
 userRouter.get(
   '/active/:token',
   expressAsyncHandler(async (req, res, next) => {
@@ -25,10 +33,37 @@ userRouter.get(
   })
 )
 
+userRouter.get(
+  '/',
+  isAuth,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.getById(req)
+    showResult(res, statusCode, data)
+  })
+)
+
+userRouter.put(
+  '/update',
+  isAuth,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.update(req)
+    showResult(res, statusCode, data)
+  })
+)
+
+userRouter.put(
+  '/update-password',
+  isAuth,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.updatePassword(req)
+    showResult(res, statusCode, data)
+  })
+)
+
 userRouter.post(
-  '/signin',
-  expressAsyncHandler(async (req, res) => {
-    const { statusCode, data } = await controller.signIn(req)
+  '/re-activate',
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.sendMail(req, res)
     showResult(res, statusCode, data)
   })
 )

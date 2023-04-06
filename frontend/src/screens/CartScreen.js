@@ -53,12 +53,16 @@ function CartScreen() {
                   <div className='text-[16px] font-bold mb-[5px]'>
                     Số lượng:{' '}
                     <input
-                      className='text-green-500 border boder-solid border-[#ccc] rounded w-1/5 text-center'
-                      type='number'
+                      className='text-green-500 border boder-solid border-[#ccc] rounded w-1/5 text-center focus:outline-none focus:border focus:border-'
+                      type='text'
                       value={item.qty}
-                      onChange={(e) => changeQtyHandler(item.product, e.target.value)}
-                      onWheel={(e) => e.currentTarget.blur()}
-                    ></input>
+                      onChange={(e) => {
+                        if (Number(e.target.value) < 1 || isNaN(e.target.value)) {
+                          e.target.value = 1
+                        }
+                        changeQtyHandler(item.product, e.target.value)
+                      }}
+                    />
                   </div>
                   <div className='text-[16px] font-bold mb-[5px]'>
                     Giá niêm yết:{' '}

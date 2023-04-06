@@ -28,10 +28,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
           qty,
         },
       })
-      localStorage.setItem(
-        'cartItems',
-        JSON.stringify(getState().cart.cartItems)
-      )
+      localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
     } else {
       dispatch({ type: CART_ADD_ITEM_FAIL, payload: 'Product not found' })
     }
@@ -39,9 +36,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
     dispatch({
       type: CART_ADD_ITEM_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+        error.response && error.response.data.message ? error.response.data.message : error.message,
     })
   }
 }
@@ -51,7 +46,7 @@ export const updateCart = (productId, newQty) => async (dispatch, getState) => {
     const { data } = await Axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}`
     )
-    if (data) {
+    if (data && Number(newQty) <= data.countInStock && Number(newQty) > 1) {
       dispatch({
         type: CART_UPDATE_ITEM,
         payload: {
@@ -60,10 +55,7 @@ export const updateCart = (productId, newQty) => async (dispatch, getState) => {
           newQty,
         },
       })
-      localStorage.setItem(
-        'cartItems',
-        JSON.stringify(getState().cart.cartItems)
-      )
+      localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
     } else {
       dispatch({ type: CART_UPDATE_ITEM_FAIL, payload: 'Product not found' })
     }
@@ -71,9 +63,7 @@ export const updateCart = (productId, newQty) => async (dispatch, getState) => {
     dispatch({
       type: CART_UPDATE_ITEM_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+        error.response && error.response.data.message ? error.response.data.message : error.message,
     })
   }
 }

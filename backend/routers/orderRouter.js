@@ -5,7 +5,6 @@ import querystring from 'qs'
 import crypto from 'crypto'
 import dotenv from 'dotenv'
 import dateFormat from 'dateformat'
-import Order from '../models/orderModel.js'
 import controller from '../controllers/orderController.js'
 
 dotenv.config()
@@ -54,7 +53,7 @@ orderRouter.post('/create_payment_url', function (req, res, next) {
 orderRouter.post(
   '/create',
   isAuth,
-  expressAsyncHandler(async (req, res) => {
+  expressAsyncHandler(async (req, res, next) => {
     const { statusCode, data } = await controller.create(req, res)
     return showResult(res, statusCode, data)
   })
@@ -62,8 +61,44 @@ orderRouter.post(
 
 orderRouter.get(
   '/:id',
-  expressAsyncHandler(async (req, res) => {
+  expressAsyncHandler(async (req, res, next) => {
     const { statusCode, data } = await controller.getById(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+orderRouter.get(
+  '/getall/:status',
+  isAuth,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.getByStatus(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+orderRouter.get(
+  '/get/:orderid/:productid/',
+  isAuth,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.getOrder(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+orderRouter.post(
+  '/cancel/:orderId',
+  isAuth,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.cancel(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+orderRouter.post(
+  '/rating/create',
+  isAuth,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.createRating(req)
     return showResult(res, statusCode, data)
   })
 )

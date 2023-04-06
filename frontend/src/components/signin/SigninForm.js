@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -42,7 +42,15 @@ function SigninForm({ setShowForm }) {
 
   useEffect(() => {
     if (userInfo) {
-      navigate('/')
+      if (!userInfo.isVerified) {
+        navigate('/activated')
+      } else {
+        if (userInfo.isAdmin) {
+          navigate('/admin/products')
+        } else {
+          navigate('/')
+        }
+      }
     }
   }, [userInfo, navigate])
 

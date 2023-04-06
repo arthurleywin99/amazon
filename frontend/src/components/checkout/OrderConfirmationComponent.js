@@ -10,9 +10,7 @@ function OrderConfirmationComponent() {
 
   const { userInfo } = useSelector((state) => state.userSignin)
 
-  const { cartItems, shippingAddress, payment } = useSelector(
-    (state) => state.cart
-  )
+  const { cartItems, shippingAddress, payment } = useSelector((state) => state.cart)
 
   const { success, loading, error } = useSelector((state) => state.createOrder)
 
@@ -29,7 +27,6 @@ function OrderConfirmationComponent() {
   const orderConfirmHandler = () => {
     dispatch(
       createOrder({
-        user: userInfo._id,
         orderItems: cartItems.map((item) => {
           return {
             name: item.name,
@@ -76,9 +73,7 @@ function OrderConfirmationComponent() {
   ) : (
     <div className='w-full flex justify-center mt-[20px] flex-wrap'>
       <div className='w-[650px] border border-solid border-[#ccc] p-[15px] rounded'>
-        <div className='text-[20px] mb-[14px] text-center'>
-          Thông tin đơn hàng
-        </div>
+        <div className='text-[20px] mb-[14px] text-center'>Thông tin đơn hàng</div>
         {shippingAddress && (
           <table className='table-auto p-[10px]'>
             <tbody>
@@ -87,9 +82,7 @@ function OrderConfirmationComponent() {
                   <span className='text-[16px] font-bold'>Họ tên</span>
                 </td>
                 <td>
-                  <span className='text-[16px]'>
-                    {shippingAddress.fullName}
-                  </span>
+                  <span className='text-[16px]'>{shippingAddress.fullName}</span>
                 </td>
               </tr>
               <tr>
@@ -105,9 +98,7 @@ function OrderConfirmationComponent() {
                   <span className='text-[16px] font-bold'>Số điện thoại</span>
                 </td>
                 <td>
-                  <span className='text-[16px]'>
-                    {shippingAddress.phoneNumber}
-                  </span>
+                  <span className='text-[16px]'>{shippingAddress.phoneNumber}</span>
                 </td>
               </tr>
               <tr>
@@ -128,9 +119,7 @@ function OrderConfirmationComponent() {
               </tr>
               <tr>
                 <td className='w-1/3'>
-                  <span className='text-[16px] font-bold'>
-                    Hình thức thanh toán
-                  </span>
+                  <span className='text-[16px] font-bold'>Hình thức thanh toán</span>
                 </td>
                 <td>
                   <span className='text-[16px]'>{payment.method}</span>
@@ -140,9 +129,7 @@ function OrderConfirmationComponent() {
                 <>
                   <tr>
                     <td className='w-1/3'>
-                      <span className='text-[16px] font-bold'>
-                        Mã thanh toán
-                      </span>
+                      <span className='text-[16px] font-bold'>Mã thanh toán</span>
                     </td>
                     <td>
                       <span className='text-[16px]'>{payment.id}</span>
@@ -150,9 +137,7 @@ function OrderConfirmationComponent() {
                   </tr>
                   <tr>
                     <td className='w-1/3'>
-                      <span className='text-[16px] font-bold'>
-                        Thời gian thanh toán
-                      </span>
+                      <span className='text-[16px] font-bold'>Thời gian thanh toán</span>
                     </td>
                     <td>
                       <span className='text-[16px]'>{payment.created}</span>
@@ -165,9 +150,7 @@ function OrderConfirmationComponent() {
         )}
       </div>
       <div className='w-[650px] border border-solid border-[#ccc] p-[15px] rounded mt-[20px]'>
-        <div className='text-[20px] mb-[14px] text-center'>
-          Thông tin sản phẩm
-        </div>
+        <div className='text-[20px] mb-[14px] text-center'>Thông tin sản phẩm</div>
         <table className='table-auto p-[10px] w-full'>
           <thead>
             <tr>
@@ -181,11 +164,7 @@ function OrderConfirmationComponent() {
               cartItems.map((item, index) => (
                 <tr key={index}>
                   <td className='w-1/5'>
-                    <img
-                      src={item.images[0]}
-                      alt={item.name}
-                      className='w-[100px]'
-                    />
+                    <img src={item.images[0]} alt={item.name} className='w-[100px]' />
                   </td>
                   <td className='text-[16px] w-3/5 text-start'>{item.name}</td>
                   <td className='text-[16px] w-1/5 text-center'>{item.qty}</td>

@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 
+const STATUS = ['pending', 'confirmed', 'delivered', 'canceled', 'evaluated']
+
 const orderSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
@@ -13,12 +15,10 @@ const orderSchema = new mongoose.Schema(
           ref: 'Product',
           required: true,
         },
-        rating: [
-          {
-            comment: { type: String, required: true },
-            rateNumber: { type: Number, default: 0 },
-          },
-        ],
+        rating: {
+          comment: { type: String },
+          rateNumber: { type: Number, default: 0 },
+        },
       },
     ],
     shippingInformation: {
@@ -33,6 +33,7 @@ const orderSchema = new mongoose.Schema(
       paidAt: { type: Date },
       paymentId: { type: String },
     },
+    status: { type: String, enum: STATUS, default: 'pending' },
   },
   {
     timestamps: true,

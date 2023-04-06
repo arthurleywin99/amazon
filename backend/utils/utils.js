@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import nodemailer from 'nodemailer'
 import msg from '../configs/messageConstants.js'
-import util from 'util'
 
 dotenv.config()
 
@@ -18,7 +17,7 @@ export const generateToken = (user) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: '2h',
+      expiresIn: '6h',
     }
   )
 }

@@ -19,21 +19,37 @@ export default {
           category: { $regex: category.toString(), $options: 'i' },
         }).populate('brand')) || []
 
-      const orders = await Order.find({})
+      const orders = await Order.find({}).select('orderItems')
 
       if (products) {
         let results = products.map((product) => {
-          const productRatingList =
-            orders.orderItems && orders.orderItems.length > 0
-              ? orders.orderItems.filter((order) => order.product === product._id)
-              : []
+          const productRatingList = orders.filter((item) =>
+            item.orderItems.some((item) => item.product.toString() === product._id.toString())
+          )
+
+          const res = productRatingList.reduce((acc, item) => {
+            acc.push(
+              item.orderItems.map((item) => {
+                return item.rating
+              })
+            )
+            return acc
+          }, [])
+
+          const sumRatingStar = res.reduce((acc, item) => {
+            return acc + Number(item[0].rateNumber)
+          }, 0)
+
+          const countRating = res.reduce((acc, item) => {
+            if (Number(item[0].rateNumber) > 0) {
+              return Number(acc) + 1
+            }
+            return acc
+          }, 0)
+
           const rating = {
-            average:
-              productRatingList.length > 0
-                ? productRatingList.rating.reduce((total, item) => total + item, 0) /
-                  productRatingList.length
-                : 0,
-            quantity: productRatingList.length,
+            average: sumRatingStar / countRating,
+            quantity: countRating,
           }
           return {
             _id: product._id,

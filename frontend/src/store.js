@@ -9,7 +9,7 @@ import {
   getSamsungTopDiscountReducer,
 } from './reducers/productReducers'
 import { searchProductReducer } from './reducers/searchReducers'
-import { userRegisterReducer, userLoginReducer } from './reducers/userReducers'
+import { userRegisterReducer, userLoginReducer, userUpdateReducer } from './reducers/userReducers'
 import { getWebInfoReducer } from './reducers/webInfoReducers'
 
 const initialState = {

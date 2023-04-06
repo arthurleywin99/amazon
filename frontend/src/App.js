@@ -20,7 +20,10 @@ import SigninScreen from './screens/SigninScreen'
 import ProductScreen from './screens/ProductScreen'
 import CheckoutScreen from './screens/CheckoutScreen'
 import CategoryScreen from './screens/CategoryScreen'
+import ActivatedScreen from './screens/ActivatedScreen'
+import RatingScreen from './screens/RatingScreen'
 import PrivateRoute from './components/shared/PrivateRoute'
+import TokenRoute from './components/shared/TokenRoute'
 
 function App() {
   return (
@@ -28,6 +31,7 @@ function App() {
       <div className='grid-container'>
         <Header />
         <Routes>
+          {/* USER ROUTE */}
           <Route path='/' element={<HomeScreen />} />
           <Route path='/category' element={<CategoryScreen />}>
             <Route path='cell-phones/order/:order' element={<CellphoneComponent />} />
@@ -43,16 +47,38 @@ function App() {
             path='/my-account'
             element={
               <PrivateRoute>
-                <AccountScreen />
+                <TokenRoute>
+                  <AccountScreen />
+                </TokenRoute>
               </PrivateRoute>
             }
           />
-          <Route path='/order-checking' element={<OrderCheckingScreen />} />
+          <Route
+            path='/order-checking'
+            element={
+              <PrivateRoute>
+                <TokenRoute>
+                  <OrderCheckingScreen />
+                </TokenRoute>
+              </PrivateRoute>
+            }
+          />
           <Route path='/cart' element={<CartScreen />} />
           <Route path='/checkout' element={<CheckoutScreen />} />
           <Route path='/search/:content/order/:order' element={<SearchScreen />} />
           <Route path='/signin' element={<SigninScreen />} />
           <Route path='/product/:id' element={<ProductScreen />} />
+          <Route path='/activated' element={<ActivatedScreen />} />
+          <Route
+            path='/rating/order/:order/product/:product'
+            element={
+              <PrivateRoute>
+                <TokenRoute>
+                  <RatingScreen />
+                </TokenRoute>
+              </PrivateRoute>
+            }
+          />
         </Routes>
         <Footer />
       </div>
