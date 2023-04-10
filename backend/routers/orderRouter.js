@@ -1,6 +1,6 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
-import { isAuth, showResult, sortObject } from '../utils/utils.js'
+import { isAdmin, isAuth, showResult, sortObject } from '../utils/utils.js'
 import querystring from 'qs'
 import crypto from 'crypto'
 import dotenv from 'dotenv'
@@ -49,6 +49,16 @@ orderRouter.post('/create_payment_url', function (req, res, next) {
 
   res.status(200).json({ message: vnpUrl })
 })
+
+orderRouter.get(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.getAll()
+    return showResult(res, statusCode, data)
+  })
+)
 
 orderRouter.post(
   '/create',
@@ -99,6 +109,36 @@ orderRouter.post(
   isAuth,
   expressAsyncHandler(async (req, res, next) => {
     const { statusCode, data } = await controller.createRating(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+orderRouter.put(
+  '/confirm/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.confirm(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+orderRouter.put(
+  '/cancel/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.cancel(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+orderRouter.put(
+  '/delivered/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.delivered(req)
     return showResult(res, statusCode, data)
   })
 )

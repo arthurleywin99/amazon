@@ -23,4 +23,14 @@ brandRouter.get(
   })
 )
 
+brandRouter.get(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.getById(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
 export default brandRouter

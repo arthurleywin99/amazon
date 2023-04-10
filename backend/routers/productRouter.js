@@ -1,6 +1,6 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
-import { showResult } from '../utils/utils.js'
+import { isAdmin, isAuth, showResult } from '../utils/utils.js'
 import controller from '../controllers/productController.js'
 
 const productRouter = express.Router()
@@ -41,6 +41,66 @@ productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
     const { statusCode, data } = await controller.getById(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+productRouter.get(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.getAll(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+productRouter.put(
+  '/lock/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.lock(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+productRouter.put(
+  '/unlock/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.unlock(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+productRouter.get(
+  '/category/getall',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.getCategories()
+    return showResult(res, statusCode, data)
+  })
+)
+
+productRouter.put(
+  '/update',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.update(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+productRouter.post(
+  '/create',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.create(req)
     return showResult(res, statusCode, data)
   })
 )

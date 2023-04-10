@@ -1,9 +1,22 @@
 import mongoose from 'mongoose'
 
+const CATEGORIES = [
+  'Cellphones',
+  'Laptops',
+  'Tablets',
+  'Accessories',
+  'Smartwatch',
+  'Watch',
+  'UsedPhone',
+  'Pcandprinter',
+  'SimAndCard',
+  'Utilities',
+]
+
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    category: { type: String, required: true },
+    category: { type: String, required: true, enum: CATEGORIES },
     brand: { type: mongoose.Schema.Types.ObjectId, ref: 'Brand' },
     images: [{ type: String, required: true }],
     price: { type: Number, default: 0 },

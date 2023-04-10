@@ -298,3 +298,62 @@ export const userPasswordSchema = Yup.object({
       },
     }),
 })
+
+export const productValidatorSchema = Yup.object({
+  name: Yup.string()
+    .required('Tên sản phẩm không được để trống')
+    .min(5, 'Độ dài sản phẩm ít nhất 5 ký tự')
+    .test({
+      name: 'Does not cotain symbol',
+      exclusive: false,
+      params: {},
+      message: 'Không chứa ký tự đặc biệt',
+      test: function (value) {
+        const myRegex =
+          /^[A-Za-z0-9'"àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệòóỏõọồốổỗộơờớởỡợùúủũụưừứửữựìíỉĩịÀÁẢÃẠĂẰẮẲẴẶÂẦẤẨẪẬÈÉẺẼẸÊỀẾỂỄỆÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰÌÍỈĨỊ ]+$/
+        return myRegex.test(value.toString())
+      },
+    }),
+  category: Yup.string().required('Loại sản phẩm không được để trống'),
+  brand: Yup.string().required('Thương hiệu không được để trống'),
+  price: Yup.number()
+    .typeError('Giá sản phẩm phải là một số nguyên')
+    .required('Giá không được để trống')
+    .test({
+      name: 'Is number',
+      exclusive: false,
+      params: {},
+      message: 'Giá sản phẩm phải là một số nguyên dương',
+      test: function (value) {
+        const temp = Number(value)
+        return !isNaN(temp) && temp > 0
+      },
+    }),
+  discount: Yup.number()
+    .typeError('Tỷ lệ giảm giá phải đúng định dạng')
+    .required('Giảm giá không được để trống')
+    .test({
+      name: 'Is number',
+      exclusive: false,
+      params: {},
+      message: 'Tỷ lệ giảm giá phải là một số nguyên âm có giá trị từ -100% đến 0%',
+      test: function (value) {
+        const temp = Number(value)
+        return !isNaN(temp) && temp <= 0 && temp >= -100
+      },
+    }),
+  countInStock: Yup.number()
+    .typeError('Số lượng tồn phải là một số nguyên')
+    .required('Số lượng tồn không được để trống')
+    .test({
+      name: 'Is number',
+      exclusive: false,
+      params: {},
+      message: 'Số lượng tồn phải là một số nguyên dương',
+      test: function (value) {
+        const temp = Number(value)
+        return !isNaN(temp) && temp >= 0
+      },
+    }),
+  description: Yup.string().required('Mô tả không được để trống'),
+})

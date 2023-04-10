@@ -40,14 +40,14 @@ function Header() {
       <div className='h-[60px] bg-[#131921] flex items-center justify-center'>
         <Link
           className='text-[35px] border-2 border-solid border-[#f08804] rounded hover:cursor-pointer'
-          to={userInfo && !userInfo.isAdmin ? '/' : '/admin/products'}
+          to={!location.pathname.includes('admin') ? '/' : '/admin/products'}
         >
           <strong>amazon</strong>
         </Link>
 
         <form
           className={`mx-[10px] w-[70vw] text-center ${
-            ((userInfo && userInfo.isAdmin) || !userInfo) && 'invisible'
+            location.pathname.includes('admin') && 'invisible'
           }`}
           onSubmit={(e) => onSubmit(e)}
         >
@@ -85,7 +85,7 @@ function Header() {
               <strong className='text-[14px]'>Tài khoản</strong>
             </span>
           </Link>
-          {userInfo && !userInfo.isAdmin && (
+          {!location.pathname.includes('admin') && (
             <>
               <Link className='text-[12px] w-auto mx-[10px]' to='/order-checking'>
                 <span>
@@ -111,7 +111,7 @@ function Header() {
           )}
         </div>
       </div>
-      {userInfo && !userInfo.isAdmin ? (
+      {!location.pathname.includes('admin') ? (
         <div className='bg-[#232f3e]'>
           <div className='container m-auto'>
             <ul className='flex items-center justify-between'>

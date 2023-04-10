@@ -2,6 +2,7 @@ import React from 'react'
 import FontAwesome from '../../utils/FontAwesome'
 
 function ImageDropComponent({
+  customClassName,
   highlighted,
   setHighlighted,
   mediaPreview,
@@ -12,7 +13,7 @@ function ImageDropComponent({
   profilePicUrl,
 }) {
   return (
-    <div className='border border-solid border-[#ccc] rounded'>
+    <div className={`${customClassName}`}>
       <input
         style={{ display: 'none' }}
         type='file'
@@ -56,7 +57,7 @@ function ImageDropComponent({
             <div
               className={`${
                 highlighted ? 'border border-solid border-rose-500' : ''
-              } hover:cursor-pointer h-[300px] flex justify-center items-center`}
+              } hover:cursor-pointer flex justify-center items-center`}
               onClick={() => inputRef.current.click()}
             >
               <FontAwesome icon='far fa-images' />

@@ -323,4 +323,104 @@ export default {
       }
     }
   },
+
+  getAll: async () => {
+    try {
+      const orders = await Order.find({}).exec()
+      return {
+        statusCode: 200,
+        data: {
+          message: orders,
+        },
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        data: {
+          message: error.message,
+        },
+      }
+    }
+  },
+
+  confirm: async (req) => {
+    try {
+      const { id } = req.params
+      const order = await Order.findById(id)
+      if (order) {
+        await Order.findByIdAndUpdate(id, {
+          $set: {
+            status: 'confirmed',
+          },
+        })
+      }
+      return {
+        statusCode: 404,
+        data: {
+          message: msg.ORDER_NOT_FOUND,
+        },
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        data: {
+          message: error.message,
+        },
+      }
+    }
+  },
+
+  cancel: async (req) => {
+    try {
+      const { id } = req.params
+      const order = await Order.findById(id)
+      if (order) {
+        await Order.findByIdAndUpdate(id, {
+          $set: {
+            status: 'canceled',
+          },
+        })
+      }
+      return {
+        statusCode: 404,
+        data: {
+          message: msg.ORDER_NOT_FOUND,
+        },
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        data: {
+          message: msg.ORDER_NOT_FOUND,
+        },
+      }
+    }
+  },
+
+  delivered: async (req) => {
+    try {
+      const { id } = req.params
+      const order = await Order.findById(id)
+      if (order) {
+        await Order.findByIdAndUpdate(id, {
+          $set: {
+            status: 'delivered',
+          },
+        })
+      }
+      return {
+        statusCode: 404,
+        data: {
+          message: msg.ORDER_NOT_FOUND,
+        },
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        data: {
+          message,
+        },
+      }
+    }
+  },
 }

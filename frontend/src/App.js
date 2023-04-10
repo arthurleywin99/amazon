@@ -27,12 +27,20 @@ import TokenRoute from './components/shared/TokenRoute'
 import AdminScreen from './screens/AdminScreen'
 import {
   AdminAccountComponent,
-  AdminBrandComponent,
   AdminOrderComponent,
   AdminPermissionComponent,
-  AdminProductComponent,
   AdminWebConfigComponent,
 } from './components/admin/index'
+import {
+  AdminBrandCreateComponent,
+  AdminBrandDetailsComponent,
+  AdminBrandUpdateComponent,
+} from './components/admin/brand/index'
+import {
+  AdminProductCreateComponent,
+  AdminProductDetailsComponent,
+  AdminProductUpdateComponent,
+} from './components/admin/product/index'
 
 function App() {
   return (
@@ -41,13 +49,118 @@ function App() {
         <Header />
         <Routes>
           {/* ADMIN ROUTE */}
-          <Route path='/admin' element={<AdminScreen />}>
-            <Route path='products' element={<AdminProductComponent />} />
-            <Route path='brands' element={<AdminBrandComponent />} />
-            <Route path='orders' element={<AdminOrderComponent />} />
-            <Route path='accounts' element={<AdminAccountComponent />} />
-            <Route path='web-configs' element={<AdminWebConfigComponent />} />
-            <Route path='permissions' element={<AdminPermissionComponent />} />
+          <Route
+            path='/admin'
+            element={
+              <PrivateRoute>
+                <AdminScreen />
+              </PrivateRoute>
+            }
+          >
+            <Route path='products'>
+              <Route
+                path=''
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminProductDetailsComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='create'
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminProductCreateComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='update/:id'
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminProductUpdateComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+            <Route path='brands'>
+              <Route
+                path=''
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminBrandDetailsComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='create'
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminBrandCreateComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='update/:id'
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminBrandUpdateComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+            <Route
+              path='orders'
+              element={
+                <PrivateRoute>
+                  <TokenRoute>
+                    <AdminOrderComponent />
+                  </TokenRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='accounts'
+              element={
+                <PrivateRoute>
+                  <TokenRoute>
+                    <AdminAccountComponent />
+                  </TokenRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='web-configs'
+              element={
+                <PrivateRoute>
+                  <TokenRoute>
+                    <AdminWebConfigComponent />
+                  </TokenRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='permissions'
+              element={
+                <PrivateRoute>
+                  <TokenRoute>
+                    <AdminPermissionComponent />
+                  </TokenRoute>
+                </PrivateRoute>
+              }
+            />
           </Route>
           {/* USER ROUTE */}
           <Route path='/' element={<HomeScreen />} />

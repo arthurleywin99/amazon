@@ -42,4 +42,5 @@ export default {
   UPDATE_SUCCESS: 'Update successfully',
   UPDATE_ERROR: 'Update failure',
   BRAND_NOT_FOUND: 'Brand not found',
+  PRODUCT_UPDATE_SUCCESS: 'Product update successfully',
 }

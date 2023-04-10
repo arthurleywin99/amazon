@@ -8,8 +8,6 @@ function OrderConfirmationComponent() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { userInfo } = useSelector((state) => state.userSignin)
-
   const { cartItems, shippingAddress, payment } = useSelector((state) => state.cart)
 
   const { success, loading, error } = useSelector((state) => state.createOrder)
