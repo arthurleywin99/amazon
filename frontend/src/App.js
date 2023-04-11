@@ -29,8 +29,11 @@ import {
   AdminAccountComponent,
   AdminOrderComponent,
   AdminPermissionComponent,
-  AdminWebConfigComponent,
 } from './components/admin/index'
+import {
+  AdminWebConfigDetailsComponent,
+  AdminWebConfigUpdateComponent,
+} from './components/admin/webinfo/index'
 import {
   AdminBrandCreateComponent,
   AdminBrandDetailsComponent,
@@ -141,16 +144,28 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route
-              path='web-configs'
-              element={
-                <PrivateRoute>
-                  <TokenRoute>
-                    <AdminWebConfigComponent />
-                  </TokenRoute>
-                </PrivateRoute>
-              }
-            />
+            <Route path='web-configs'>
+              <Route
+                path=''
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminWebConfigDetailsComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='update/:id'
+                element={
+                  <PrivateRoute>
+                    <TokenRoute>
+                      <AdminWebConfigUpdateComponent />
+                    </TokenRoute>
+                  </PrivateRoute>
+                }
+              />
+            </Route>
             <Route
               path='permissions'
               element={

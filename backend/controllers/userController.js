@@ -282,6 +282,25 @@ export default {
     }
   },
 
+  getAll: async () => {
+    try {
+      const users = await User.find({}).exec()
+      return {
+        statusCode: 200,
+        data: {
+          message: users,
+        },
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        data: {
+          message: error.message,
+        },
+      }
+    }
+  },
+
   update: async (req) => {
     try {
       const {

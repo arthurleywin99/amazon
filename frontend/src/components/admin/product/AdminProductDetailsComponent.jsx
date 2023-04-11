@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import AdminProductDetailReview from './AdminProductDetailReview'
+import { calculateTime } from '../../utils/utils.js'
 
 function AdminProductDetailsComponent() {
   const navigate = useNavigate()
@@ -126,22 +127,22 @@ function AdminProductDetailsComponent() {
                       index % 2 !== 0 && 'bg-[#ccc]'
                     }`}
                   >
-                    <td className='text-[18px] p-[10px]'>{item._id.slice(0, 10) + '...'}</td>
-                    <td className='text-[18px] p-[10px]'>{item.name.slice(0, 20) + '...'}</td>
-                    <td className='text-[18px] p-[10px]'>{item.category}</td>
-                    <td className='text-[18px] p-[10px]'>{item.brand.name}</td>
+                    <td className='text-[16px] p-[10px]'>{item._id.slice(0, 10) + '...'}</td>
+                    <td className='text-[16px] p-[10px]'>{item.name.slice(0, 20) + '...'}</td>
+                    <td className='text-[16px] p-[10px]'>{item.category}</td>
+                    <td className='text-[16px] p-[10px]'>{item.brand.name}</td>
                     <td className='flex justify-center items-center p-[10px]'>
                       <img className='w-[80px]' src={item.images[0]} alt={item.name} />
                     </td>
-                    <td className='text-[18px] p-[10px]'>
+                    <td className='text-[16px] p-[10px]'>
                       {item.price.toLocaleString('it-IT', {
                         style: 'currency',
                         currency: 'VND',
                       })}
                     </td>
-                    <td className='text-[18px] p-[10px]'>{item.discount}%</td>
-                    <td className='text-[18px] p-[10px]'>{item.countInStock}</td>
-                    <td className='text-[18px] p-[10px]'>{item.updatedAt}</td>
+                    <td className='text-[16px] p-[10px]'>{item.discount}%</td>
+                    <td className='text-[16px] p-[10px]'>{item.countInStock}</td>
+                    <td className='text-[16px] p-[10px]'>{calculateTime(item.updatedAt)}</td>
                     <td>
                       <div className='flex'>
                         <button

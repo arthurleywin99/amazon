@@ -1,40 +1,42 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { calculateTime } from '../../utils/utils.js'
 
-function AdminBrandDetailsComponent() {
+function AdminWebConfigDetailsComponent() {
   const navigate = useNavigate()
 
-  const { userInfo } = useSelector((state) => state.userSignin)
-
-  const [brands, setBrands] = useState([])
+  const [webInfoList, setWebInfoList] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    setLoading(true)
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/brands`, {
+  const getData = () => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/webinfos`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        setBrands(data.message)
+        setWebInfoList(data)
         setLoading(false)
       })
-      .catch((err) => setError(err.message))
-  }, [])
-
-  const brandCreateHandler = () => {
-    navigate('/admin/brands/create')
+      .catch((err) => setError(err))
   }
 
-  const brandChangeHandler = (id) => {
-    navigate(`/admin/brands/update/${id}`)
+  useEffect(() => {
+    setLoading(true)
+    getData()
+  }, [])
+
+  const backHandler = () => {
+    navigate(-1)
+  }
+
+  const webInfoCreateHandler = () => {}
+
+  const webInfoChangeHandler = (id) => {
+    navigate(`/admin/web-configs/update/${id}`)
   }
 
   return loading ? (
@@ -43,14 +45,20 @@ function AdminBrandDetailsComponent() {
     <div>{error}</div>
   ) : (
     <div className='mr-[15px]'>
-      <h1 className='uppercase text-[22px] font-bold mt-[5px]'>Quản lý thương hiệu</h1>
+      <h1 className='uppercase text-[22px] font-bold mt-[5px]'>Quản lý thông tin web</h1>
+      <button
+        className='text-[18px] px-[10px] py-[5px] bg-gray-500 text-white rounded hover:bg-gray-600 mr-[10px]'
+        onClick={() => backHandler()}
+      >
+        Trở về
+      </button>
       <button
         className='text-[18px] px-[10px] py-[5px] bg-green-600 text-white rounded'
-        onClick={() => brandCreateHandler()}
+        onClick={() => webInfoCreateHandler()}
       >
         Tạo mới
       </button>
-      <table class='table-auto w-full text-center border border-solid border-[#ccc] mt-[10px] rounded'>
+      <table className='table-auto w-full text-center border border-solid border-[#ccc] mt-[10px] rounded'>
         <thead className='border-bottom-[#ccc]'>
           <tr className='bg-blue-500 text-white'>
             <th className='w-[25%] p-[10px] text-[20px] uppercase'>ID</th>
@@ -61,8 +69,8 @@ function AdminBrandDetailsComponent() {
           </tr>
         </thead>
         <tbody>
-          {brands &&
-            brands.map((item, index) => {
+          {webInfoList &&
+            webInfoList.map((item, index) => {
               return (
                 <tr
                   key={index}
@@ -79,7 +87,7 @@ function AdminBrandDetailsComponent() {
                       <button
                         className='px-[10px] py-[5px] text-[16px] uppercase'
                         type='button'
-                        onClick={() => brandChangeHandler(item._id)}
+                        onClick={() => webInfoChangeHandler(item._id)}
                       >
                         <i className='fal fa-edit text-[25px] text-blue-500 px-[10px] py-[5px]'></i>
                       </button>
@@ -97,4 +105,4 @@ function AdminBrandDetailsComponent() {
   )
 }
 
-export default AdminBrandDetailsComponent
+export default AdminWebConfigDetailsComponent

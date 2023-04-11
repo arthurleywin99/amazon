@@ -1,6 +1,6 @@
 import express from 'express'
 import expressAsyncHandler from 'express-async-handler'
-import { generateToken, isAuth, showResult } from '../utils/utils.js'
+import { generateToken, isAdmin, isAuth, showResult } from '../utils/utils.js'
 import controller from '../controllers/userController.js'
 
 const userRouter = express.Router()
@@ -38,6 +38,16 @@ userRouter.get(
   isAuth,
   expressAsyncHandler(async (req, res, next) => {
     const { statusCode, data } = await controller.getById(req)
+    showResult(res, statusCode, data)
+  })
+)
+
+userRouter.get(
+  '/getall',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.getAll(req)
     showResult(res, statusCode, data)
   })
 )
