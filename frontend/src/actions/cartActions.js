@@ -12,19 +12,19 @@ import Axios from 'axios'
 
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
   try {
-    const { data } = await Axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}`
-    )
-    if (data) {
+    const {
+      data: { message },
+    } = await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}`)
+    if (message) {
       dispatch({
         type: CART_ADD_ITEM,
         payload: {
-          product: data._id,
-          name: data.name,
-          images: data.images,
-          price: data.price,
-          discount: data.discount,
-          countInStock: data.countInStock,
+          product: message._id,
+          name: message.name,
+          images: message.images,
+          price: message.price,
+          discount: message.discount,
+          countInStock: message.countInStock,
           qty,
         },
       })
@@ -43,15 +43,15 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
 
 export const updateCart = (productId, newQty) => async (dispatch, getState) => {
   try {
-    const { data } = await Axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}`
-    )
-    if (data && Number(newQty) <= data.countInStock && Number(newQty) > 1) {
+    const {
+      data: { message },
+    } = await Axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}`)
+    if (message && Number(newQty) <= message.countInStock && Number(newQty) > 1) {
       dispatch({
         type: CART_UPDATE_ITEM,
         payload: {
-          product: data._id,
-          countInStock: data.countInStock,
+          product: message._id,
+          countInStock: message.countInStock,
           newQty,
         },
       })

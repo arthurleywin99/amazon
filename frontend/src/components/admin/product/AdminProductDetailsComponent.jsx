@@ -16,7 +16,7 @@ function AdminProductDetailsComponent() {
   const [id, setId] = useState(null)
 
   const getData = () => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/get/all`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -127,35 +127,35 @@ function AdminProductDetailsComponent() {
                       index % 2 !== 0 && 'bg-[#ccc]'
                     }`}
                   >
-                    <td className='text-[16px] p-[10px]'>{item._id.slice(0, 10) + '...'}</td>
-                    <td className='text-[16px] p-[10px]'>{item.name.slice(0, 20) + '...'}</td>
-                    <td className='text-[16px] p-[10px]'>{item.category}</td>
-                    <td className='text-[16px] p-[10px]'>{item.brand.name}</td>
+                    <td className='text-[16px] p-[10px]'>{item?._id.slice(0, 10) + '...'}</td>
+                    <td className='text-[16px] p-[10px]'>{item?.name.slice(0, 20) + '...'}</td>
+                    <td className='text-[16px] p-[10px]'>{item?.category}</td>
+                    <td className='text-[16px] p-[10px]'>{item?.brand.name || ''}</td>
                     <td className='flex justify-center items-center p-[10px]'>
                       <img className='w-[80px]' src={item.images[0]} alt={item.name} />
                     </td>
                     <td className='text-[16px] p-[10px]'>
-                      {item.price.toLocaleString('it-IT', {
+                      {item?.price.toLocaleString('it-IT', {
                         style: 'currency',
                         currency: 'VND',
                       })}
                     </td>
-                    <td className='text-[16px] p-[10px]'>{item.discount}%</td>
-                    <td className='text-[16px] p-[10px]'>{item.countInStock}</td>
-                    <td className='text-[16px] p-[10px]'>{calculateTime(item.updatedAt)}</td>
+                    <td className='text-[16px] p-[10px]'>{item?.discount}%</td>
+                    <td className='text-[16px] p-[10px]'>{item?.countInStock}</td>
+                    <td className='text-[16px] p-[10px]'>{calculateTime(item?.updatedAt)}</td>
                     <td>
                       <div className='flex'>
                         <button
                           className='px-[10px] py-[5px] text-[16px] uppercase'
                           type='button'
-                          onClick={() => productReviewHandler(item._id)}
+                          onClick={() => productReviewHandler(item?._id)}
                         >
                           <i className='far fa-eye text-[25px] text-blue-500 px-[10px] py-[5px]'></i>
                         </button>
                         <button
                           className='px-[10px] py-[5px] text-[16px] uppercase'
                           type='button'
-                          onClick={() => productChangeHandler(item._id)}
+                          onClick={() => productChangeHandler(item?._id)}
                         >
                           <i className='fal fa-edit text-[25px] text-blue-500 px-[10px] py-[5px]'></i>
                         </button>
@@ -163,7 +163,7 @@ function AdminProductDetailsComponent() {
                           <button
                             className='px-[10px] py-[5px] text-[16px] uppercase'
                             type='button'
-                            onClick={() => productLockHandler(item._id)}
+                            onClick={() => productLockHandler(item?._id)}
                           >
                             <i className='far fa-lock-open text-[25px] text-blue-500 px-[10px] py-[5px]'></i>
                           </button>
@@ -171,7 +171,7 @@ function AdminProductDetailsComponent() {
                           <button
                             className='px-[10px] py-[5px] text-[16px] uppercase'
                             type='button'
-                            onClick={() => productUnlockHandler(item._id)}
+                            onClick={() => productUnlockHandler(item?._id)}
                           >
                             <i className='far fa-lock text-[25px] text-blue-500 px-[10px] py-[5px]'></i>
                           </button>

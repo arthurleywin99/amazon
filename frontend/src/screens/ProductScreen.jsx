@@ -9,9 +9,7 @@ function ProductScreen() {
   const dispatch = useDispatch()
   const { id } = useParams()
 
-  const { product, loading, error } = useSelector(
-    (state) => state.getProductById
-  )
+  const { product, loading, error } = useSelector((state) => state.getProductById)
 
   useEffect(() => {
     dispatch(getProductById(id))
@@ -59,9 +57,7 @@ function ProductScreen() {
               <span className='text-[18px] font-bold'>Tình trạng:</span>{' '}
               <span
                 className={`text-[18px] ${
-                  product.countInStock > 0
-                    ? 'text-green-600 font-bold'
-                    : 'text-red-600 font-bold'
+                  product.countInStock > 0 ? 'text-green-600 font-bold' : 'text-red-600 font-bold'
                 }`}
               >
                 {product.countInStock > 0 ? 'Còn hàng' : 'Hết hàng'}
@@ -79,13 +75,13 @@ function ProductScreen() {
             <div className='grid grid-cols-2 my-[10px]'>
               <span className='text-[18px] font-bold'>Giá bán:</span>
               <span className='text-[18px] font-bold text-orange-500'>
-                {(
-                  product.price +
-                  (product.price * product.discount) / 100
-                ).toLocaleString('it-IT', {
-                  style: 'currency',
-                  currency: 'VND',
-                })}
+                {(product.price + (product.price * product.discount) / 100).toLocaleString(
+                  'it-IT',
+                  {
+                    style: 'currency',
+                    currency: 'VND',
+                  }
+                )}
               </span>
             </div>
             <div className='grid grid-cols-2 my-[10px]'>

@@ -47,10 +47,16 @@ productRouter.get(
 
 productRouter.get(
   '/',
-  isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const { statusCode, data } = await controller.getAll(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+productRouter.get(
+  '/get/all',
+  expressAsyncHandler(async (req, res) => {
+    const { statusCode, data } = await controller.getAllAdmin(req)
     return showResult(res, statusCode, data)
   })
 )

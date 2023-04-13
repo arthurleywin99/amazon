@@ -96,15 +96,6 @@ orderRouter.get(
 )
 
 orderRouter.post(
-  '/cancel/:orderId',
-  isAuth,
-  expressAsyncHandler(async (req, res, next) => {
-    const { statusCode, data } = await controller.cancel(req)
-    return showResult(res, statusCode, data)
-  })
-)
-
-orderRouter.post(
   '/rating/create',
   isAuth,
   expressAsyncHandler(async (req, res, next) => {
@@ -126,7 +117,6 @@ orderRouter.put(
 orderRouter.put(
   '/cancel/:id',
   isAuth,
-  isAdmin,
   expressAsyncHandler(async (req, res, next) => {
     const { statusCode, data } = await controller.cancel(req)
     return showResult(res, statusCode, data)

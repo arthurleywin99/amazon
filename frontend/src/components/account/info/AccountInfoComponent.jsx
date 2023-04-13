@@ -37,7 +37,9 @@ function AccountInfoComponent() {
           {displayUpdateUserModal && (
             <UpdateUserModalComponent setShowForm={setDisplayUpdateUserModal} user={user} />
           )}
-          {displayUpdatePassModal && <UpdatePasswordModalComponent user={user} />}
+          {displayUpdatePassModal && (
+            <UpdatePasswordModalComponent setShowForm={setDisplayUpdatePassModal} user={user} />
+          )}
           <div>
             <h1>Thông tin tài khoản</h1>
             <div className='grid grid-cols-[300px_1fr] gap-4'>
@@ -79,17 +81,7 @@ function AccountInfoComponent() {
                     </tr>
                     <tr>
                       <td className='text-[18px] px-[10px] py-[10px] font-bold'>Địa chỉ</td>
-                      <td className='text-[18px] px-[10px] py-[10px] italic'>{user.address}</td>
-                    </tr>
-                    <tr>
-                      <td className='text-[18px] px-[10px] py-[10px] font-bold'>
-                        Số đơn hàng đã thanh toán
-                      </td>
-                      <td className='text-[18px] px-[10px] py-[10px] italic'>0</td>
-                    </tr>
-                    <tr>
-                      <td className='text-[18px] px-[10px] py-[10px] font-bold'>Số tiền đã mua</td>
-                      <td className='text-[18px] px-[10px] py-[10px] italic'>0</td>
+                      <td className='text-[18px] px-[10px] py-[10px] italic'>{user?.address}</td>
                     </tr>
                   </tbody>
                 </table>

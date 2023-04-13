@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FontAwesome from '../components/utils/FontAwesome'
+import { useDispatch } from 'react-redux'
+import { signout } from '../actions/userActions'
 
 function ActivatedScreen() {
+  const dispatch = useDispatch()
+
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [msg, setMsg] = useState(
     'Tài khoản của bạn chưa được kích hoạt. Vui lòng nhập lại email mà bạn đã đăng ký để nhận email kích hoạt'
   )
+
+  useEffect(() => {
+    dispatch(signout())
+  }, [])
 
   const activatedAccount = () => {
     setLoading(true)
@@ -30,8 +38,10 @@ function ActivatedScreen() {
   return (
     <div className='mx-auto container text-center mt-[18px]'>
       <div>
-        <h1 className='text-center pb-[10px]'>
-          <span className='bg-rose-500 text-white'>{error ? <>{error}</> : <>{msg}</>}</span>
+        <h1 className='text-center pb-[10px] mb-[20px]'>
+          <span className='bg-rose-500 text-white text-[22px] px-2 py-2.5 rounded italic'>
+            {error ? <>{error}</> : <>{msg}</>}
+          </span>
         </h1>
         <div>
           <input

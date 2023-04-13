@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { productValidatorSchema } from '../../utils/Schema'
 import { useSelector } from 'react-redux'
 import ImageDropComponent from '../../account/info/ImageDropComponent'
+import FontAwesome from '../../utils/FontAwesome'
 
 const settingList = [
   {
@@ -73,6 +74,7 @@ function AdminProductCreateComponent() {
   const [error, setError] = useState(null)
   const [images, setImages] = useState([])
   const [data, setData] = useState(null)
+  const [btnLoading, setBtnLoading] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -112,6 +114,7 @@ function AdminProductCreateComponent() {
   const inputRef3 = useRef(null)
 
   const uploadImage = async (media) => {
+    setBtnLoading(true)
     let formData = new FormData()
     formData.set('file', media)
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/utils/cloudinary-upload`, {
@@ -156,6 +159,8 @@ function AdminProductCreateComponent() {
         .then((data) => {
           if (data.message) {
             setSuccess(true)
+            setBtnLoading(false)
+            setSettings(settingList)
             navigate(-1, { replace: true })
           }
         })
@@ -420,7 +425,7 @@ function AdminProductCreateComponent() {
               className='px-[60px] py-[10px] bg-green-600 text-white uppercase text-[18px] font-bold rounded hover:bg-green-800'
               type='submit'
             >
-              Tạo mới
+              {btnLoading && <FontAwesome icon='animate-spin fal fa-circle-notch' />} Tạo mới
             </button>
             <button
               className='px-[60px] py-[10px] bg-cyan-600 text-white uppercase text-[18px] font-bold rounded hover:bg-cyan-800'

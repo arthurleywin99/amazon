@@ -18,6 +18,7 @@ export default {
       const products =
         (await Product.find({
           category: { $regex: category.toString(), $options: 'i' },
+          status: true,
         }).populate('brand')) || []
 
       const orders = await Order.find({}).select('orderItems')
@@ -65,6 +66,7 @@ export default {
             description: product.description,
             settings: product.settings,
             rating,
+            status: product.status,
           }
         })
 
@@ -97,7 +99,7 @@ export default {
   },
 
   getTopDiscount: async () => {
-    const product = await Product.find({})
+    const product = await Product.find({ status: true })
     const orders = await Order.find({})
     const results = product.sort((a, b) => (a.discount > b.discount ? 1 : -1)).slice(0, 15)
 
@@ -146,7 +148,7 @@ export default {
 
   getTopDiscountByBrandName: async (name) => {
     const samsungObj = await Brand.findOne({ name })
-    const product = await Product.find({ brand: samsungObj._id })
+    const product = await Product.find({ brand: samsungObj._id, status: true })
     const orders = await Order.find({})
     const results = product.sort((a, b) => (a.discount > b.discount ? 1 : -1)).slice(0, 15)
 
@@ -263,6 +265,25 @@ export default {
   },
 
   getAll: async () => {
+    try {
+      const product = await Product.find({ status: true }).populate('brand').exec()
+      return {
+        statusCode: 200,
+        data: {
+          message: product,
+        },
+      }
+    } catch (error) {
+      return {
+        statusCode: 500,
+        data: {
+          message: error.message,
+        },
+      }
+    }
+  },
+
+  getAllAdmin: async () => {
     try {
       const product = await Product.find({}).populate('brand').exec()
       return {

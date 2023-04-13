@@ -35,7 +35,7 @@ function OrderInfoComponent() {
 
   const cancelOrderHandler = (orderId) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders/cancel/${orderId}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${userInfo.token}`,
@@ -57,7 +57,7 @@ function OrderInfoComponent() {
         orderList.map((item, index) => (
           <div
             key={index}
-            className='border border-solid border-[#ccc] rounded px-[10px] py-[15px] mt-[10px] grid grid-cols-[150px_1fr_150px]'
+            className='border border-solid border-[#ccc] rounded px-[10px] py-[15px] mt-[10px] grid grid-cols-[150px_1fr_250px]'
           >
             <img className='w-[120px]' src={item.data.product.images[0]} alt={item.data.name} />
             <div>

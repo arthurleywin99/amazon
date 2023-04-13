@@ -83,8 +83,9 @@ function SignupForm({ setShowForm }) {
           </div>
           <h1 className='text-3xl font-bold'>Đăng ký</h1>
 
-          {loading && <Loading />}
-          {error && <Message message={error} color='danger' />}
+          {error && (
+            <div className='text-[18px] italic bg-rose-400 rounded px-3 py-3.5'>{error}</div>
+          )}
 
           <input
             {...register('firstName')}
@@ -97,7 +98,7 @@ function SignupForm({ setShowForm }) {
           />
 
           {errors.firstName && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[14%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[12%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
               {errors.firstName?.message}
             </div>
           )}
@@ -113,7 +114,7 @@ function SignupForm({ setShowForm }) {
           />
 
           {errors.lastName && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] top-[23%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[15px]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] top-[21%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[15px]'>
               {errors.lastName?.message}
             </div>
           )}
@@ -129,7 +130,7 @@ function SignupForm({ setShowForm }) {
           />
 
           {errors.email && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[33%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[26%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[42px]'>
               {errors.email?.message}
             </div>
           )}
@@ -145,7 +146,7 @@ function SignupForm({ setShowForm }) {
           />
 
           {errors.phoneNumber && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[33%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] top-[39%] after:content-[""] after:absolute after:w-0 after:h-0 after:border-[10px] after:border-solid after:border-transparent after:border-l-danger after:right-[-20px] after:top-[12px]'>
               {errors.phoneNumber?.message}
             </div>
           )}
@@ -161,7 +162,7 @@ function SignupForm({ setShowForm }) {
           />
 
           {errors.password && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] top-[42%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[14px]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] top-[48%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[14px]'>
               {errors.password?.message}
             </div>
           )}
@@ -223,13 +224,13 @@ function SignupForm({ setShowForm }) {
           </div>
 
           {errors.atLeast13 && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] bottom-[35%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-l-danger before:right-[-20px] before:top-[20%]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] bottom-[32%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-l-danger before:right-[-20px] before:top-[20%]'>
               {errors.atLeast13?.message}
             </div>
           )}
 
           {errors.noMoreThan70 && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] bottom-[35%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-l-danger before:right-[-20px] before:top-[20%]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute left-[-200px] bottom-[32%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-l-danger before:right-[-20px] before:top-[20%]'>
               {errors.noMoreThan70?.message}
             </div>
           )}
@@ -273,7 +274,7 @@ function SignupForm({ setShowForm }) {
           </div>
 
           {errors.gender && (
-            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] bottom-[28%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[10px]'>
+            <div className='bg-danger text-white rounded-sm py-[15px] px-[10px] text-[13px] text-left w-[200px] validation-shadow absolute right-[-200px] bottom-[25%] before:content[""] before:absolute before:w-0 before:h-0 before:border-[10px] before:border-solid before:border-transparent before:border-r-danger before:left-[-20px] before:top-[10px]'>
               {errors.gender?.message}
             </div>
           )}

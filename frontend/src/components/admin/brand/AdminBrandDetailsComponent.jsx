@@ -12,8 +12,7 @@ function AdminBrandDetailsComponent() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    setLoading(true)
+  const getData = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/api/brands`, {
       method: 'GET',
       headers: new Headers({
@@ -27,6 +26,11 @@ function AdminBrandDetailsComponent() {
         setLoading(false)
       })
       .catch((err) => setError(err.message))
+  }
+
+  useEffect(() => {
+    setLoading(true)
+    getData()
   }, [])
 
   const brandCreateHandler = () => {
@@ -35,6 +39,24 @@ function AdminBrandDetailsComponent() {
 
   const brandChangeHandler = (id) => {
     navigate(`/admin/brands/update/${id}`)
+  }
+
+  const brandDeleteHandler = (id) => {
+    setLoading(true)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/brands/${id}`, {
+      method: 'DELETE',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          getData()
+        }
+      })
+      .catch((err) => setError(err.message))
   }
 
   return loading ? (
@@ -50,7 +72,7 @@ function AdminBrandDetailsComponent() {
       >
         Tạo mới
       </button>
-      <table class='table-auto w-full text-center border border-solid border-[#ccc] mt-[10px] rounded'>
+      <table className='table-auto w-full text-center border border-solid border-[#ccc] mt-[10px] rounded'>
         <thead className='border-bottom-[#ccc]'>
           <tr className='bg-blue-500 text-white'>
             <th className='w-[25%] p-[10px] text-[20px] uppercase'>ID</th>
@@ -83,9 +105,13 @@ function AdminBrandDetailsComponent() {
                       >
                         <i className='fal fa-edit text-[25px] text-blue-500 px-[10px] py-[5px]'></i>
                       </button>
-                      {/* <button className='px-[10px] py-[5px] text-[16px] uppercase' type='button'>
-                        Khoá
-                      </button> */}
+                      <button
+                        className='px-[10px] py-[5px] text-[16px] uppercase'
+                        type='button'
+                        onClick={() => brandDeleteHandler(item._id)}
+                      >
+                        <i className='fal fa-trash text-[25px] text-rose-500 px-[10px] py-[5px]'></i>
+                      </button>
                     </div>
                   </td>
                 </tr>

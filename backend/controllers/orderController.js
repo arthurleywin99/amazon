@@ -2,6 +2,7 @@ import Order from '../models/orderModel.js'
 import { sendMailActivate } from '../utils/utils.js'
 import msg from '../configs/messageConstants.js'
 import util from 'util'
+import Product from '../models/productModel.js'
 
 export default {
   create: async (req, res) => {
@@ -17,8 +18,8 @@ export default {
         payment,
       }).save()
 
-      const total = orderCreated.orderItems.reduce((item) => {
-        return item.price * item.qty
+      const total = orderCreated.orderItems.reduce((acc, item) => {
+        return acc + Number(item.price) * Number(item.qty)
       }, 0)
 
       if (orderCreated) {
@@ -36,6 +37,15 @@ export default {
           ),
         }
         sendMailActivate(res, mailOptions)
+
+        orderItems &&
+          orderItems.forEach(async (item) => {
+            const product = await Product.findById(item.product)
+            if (product) {
+              product.countInStock = Number(product.countInStock) - Number(item.qty)
+              await product.save()
+            }
+          })
 
         return {
           statusCode: 200,

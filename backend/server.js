@@ -9,6 +9,8 @@ import webInfoRouter from './routers/webInfoRouter.js'
 import userRouter from './routers/userRouter.js'
 import orderRouter from './routers/orderRouter.js'
 import searchRouter from './routers/searchRouter.js'
+import helmet from 'helmet'
+import xss from 'xss-clean'
 
 dotenv.config()
 
@@ -33,6 +35,8 @@ function options(req, res) {
 }
 
 app.use(cors(options))
+app.use(helmet())
+app.use(xss())
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))
 

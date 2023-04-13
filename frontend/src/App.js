@@ -56,7 +56,9 @@ function App() {
             path='/admin'
             element={
               <PrivateRoute>
-                <AdminScreen />
+                <TokenRoute>
+                  <AdminScreen />
+                </TokenRoute>
               </PrivateRoute>
             }
           >

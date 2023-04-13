@@ -11,7 +11,7 @@ const ExitButton = React.memo(() => {
   return <FontAwesome icon='fas fa-times' color='#777' />
 })
 
-function UpdatePasswordModalComponent({ user }) {
+function UpdatePasswordModalComponent({ setShowForm }) {
   const dispatch = useDispatch()
 
   const {
@@ -27,7 +27,9 @@ function UpdatePasswordModalComponent({ user }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const handleHideForm = () => {}
+  const handleHideForm = () => {
+    setShowForm(false)
+  }
 
   const onSubmit = async (values) => {
     setLoading(true)

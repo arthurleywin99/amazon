@@ -18,7 +18,7 @@ function AdminWebConfigDetailsComponent() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setWebInfoList(data)
+        setWebInfoList(data.message)
         setLoading(false)
       })
       .catch((err) => setError(err))

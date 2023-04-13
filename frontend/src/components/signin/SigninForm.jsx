@@ -62,8 +62,12 @@ function SigninForm({ setShowForm }) {
       >
         <h1 className='text-3xl font-bold'>Đăng nhập</h1>
 
+        {error && <div className='text-[18px] italic bg-rose-400 rounded'>{error}</div>}
+
         {userRegister && firstTouchedRef.current && (
-          <Message message='Đăng ký thành công, vui lòng đăng nhập' color='success' />
+          <div className='text-[18px] italic bg-green-400 rounded px-3 py-3.5'>
+            Đăng ký thành công, vui lòng đăng nhập
+          </div>
         )}
         {error && <Message message={error} color='danger' />}
 

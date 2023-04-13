@@ -23,12 +23,42 @@ brandRouter.get(
   })
 )
 
+brandRouter.post(
+  '/create',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.create(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
 brandRouter.get(
   '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res, next) => {
     const { statusCode, data } = await controller.getById(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+brandRouter.put(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.update(req)
+    return showResult(res, statusCode, data)
+  })
+)
+
+brandRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res, next) => {
+    const { statusCode, data } = await controller.delete(req)
     return showResult(res, statusCode, data)
   })
 )
